@@ -11,7 +11,8 @@ angular.module('acroScore.addScore', [
 		console.log("adding score to database")
 		getPostFactory.test($scope)
 			// .then(function() {
-				$location.path('/')
+				alert("your score is being added to the acroScore database");
+				$location.path('/');
 			// })
 
 
