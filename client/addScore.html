@@ -3,31 +3,36 @@
 
 <form id="addScoreForm" ng-submit="addScoreToDatabase()">
 
-<!-- meet name -->
 <fieldset>
+<div><h4>Enter Meet Information</h4></div>
+<!-- meet name -->
 	<label>Meet Name</label>
 	<input type="text" ng-model="meetName" placeholder="meet name">
 </fieldset>
-<!-- group number -->
+
 <fieldset>
+<div><h4>Enter Athlete Information</h4></div>
+<!-- group number -->
 	<label>Pair/Group Number</label>
 	<input type="text" ng-model="groupNumber" placeholder="pair/group number">
-</fieldset>
+	<br>
 <!-- group names  -->
-<fieldset>
+
 	<label>Pair/Group Names</label>
 	<input type="text" ng-model="athlete1" placeholder="athlete #1 name">
 	<input type="text" ng-model="athlete2" placeholder="athlete #2 name">
 	<input type="text" ng-model="athlete3" placeholder="athlete #3 name">
 	<input type="text" ng-model="athlete4" placeholder="athlete #4 name">
-</fieldset>
+<br>
 <!-- team -->
-<fieldset>
+
 	<label>Acro Team Name</label>
 	<input type="text" ng-model="teamName" placeholder="team name">
 </fieldset>
-<!-- routine type -->
+
 <fieldset>
+<div><h4>Enter Routine and Score Information</h4></div>
+<!-- routine type -->
 	<label>Routine Type</label>
 	<select ng-model="routineType">
 		<option value="" selected>Choose Routine Type</option>
@@ -35,11 +40,31 @@
 		<option value="dynamic">Dynamic</option>
 		<option value="combined">Combined</option>
 	</select>
-</fieldset>
-<!-- routine score -->
-<fieldset>
-	<label>Routine Score</label>
-	<input type="text" ng-model="routineScore" placeholder="score">
+<br>
+<!-- artistry score -->
+
+	<label>Artistry</label>
+	<input type="text" ng-model="artistryScore" placeholder="artistry">
+
+<!-- execution score -->
+
+	<label>Execution</label>
+	<input type="text" ng-model="executionScore" placeholder="execution">
+
+<!-- difficlty score -->
+
+	<label>Difficulty</label>
+	<input type="text" ng-model="difficultyScore" placeholder="difficulty">
+
+<!-- penalties (enter a positive number)-->
+
+	<label>Penalties (enter positive number)</label>
+	<input type="text" ng-model="penalties" placeholder="penalties">
+<br>
+<!-- total score -->
+
+	<label>Total Routine Score</label>
+	<input type="text" ng-model="totalScore" placeholder="total score">
 </fieldset>
 
 <button type="submit">Add score to the database</button>
