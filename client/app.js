@@ -14,8 +14,11 @@ angular.module('acroScore', [
 		// controller logic is in js files that correspond to each partial html file
 		// these define the different states/views/controllers
 		$stateProvider
+			.state('home', {
+				url: '/'
+			})
 			.state('addScore', {
-				url: '/',
+				url: '/addScore',
 				templateUrl: 'addScore.html',
 				controller: 'AddScoreController'
 			})

@@ -8,13 +8,22 @@
 </head>
 
 <body ng-app="acroScore">
+    <!-- heading, tagline -->
     <div>
         <center>
             <h1>acroScore</h1>
             <h2>online database of acrobatic gymnastics meet scores</h2>
         </center>
     </div>
+    <!-- buttons/future navbar -->
+    <div>
+        <ul>
+            <button ui-sref="home">home</button>
+            <button ui-sref="addScore">add score</button>
+        </ul>
+    </div>
 
+    <!-- where the new views will show up -->
     <div ui-view></div>
 
     <!-- Angular -->
