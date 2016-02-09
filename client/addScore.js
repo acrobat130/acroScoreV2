@@ -9,8 +9,11 @@ angular.module('acroScore.addScore', [
 
 	$scope.addScoreToDatabase = function() {
 		console.log("adding score to database")
-		getPostFactory.test()
-		$location.path('/')
+		getPostFactory.test($scope)
+			// .then(function() {
+				$location.path('/')
+			// })
+
 
 	}
 }])
