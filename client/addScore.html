@@ -1,3 +1,49 @@
 <div>
-<h3>this is the addScore view</h3>
+<h3>add an acro score to the database</h3>
+
+<form id="addScoreForm" ng-submit="addScoreToDatabase()">
+
+<!-- meet name -->
+<fieldset>
+	<label>Meet Name</label>
+	<input type="text" ng-model="meetName" placeholder="meet name">
+</fieldset>
+<!-- group number -->
+<fieldset>
+	<label>Pair/Group Number</label>
+	<input type="text" ng-model="groupNumber" placeholder="pair/group number">
+</fieldset>
+<!-- group names  -->
+<fieldset>
+	<label>Pair/Group Names</label>
+	<input type="text" ng-model="athlete1" placeholder="athlete #1 name">
+	<input type="text" ng-model="athlete2" placeholder="athlete #2 name">
+	<input type="text" ng-model="athlete3" placeholder="athlete #3 name">
+	<input type="text" ng-model="athlete4" placeholder="athlete #4 name">
+</fieldset>
+<!-- team -->
+<fieldset>
+	<label>Acro Team Name</label>
+	<input type="text" ng-model="teamName" placeholder="team name">
+</fieldset>
+<!-- routine type -->
+<fieldset>
+	<label>Routine Type</label>
+	<select ng-model="routineType">
+		<option value="" selected>Choose Routine Type</option>
+		<option value="balance">Balance</option>
+		<option value="dynamic">Dynamic</option>
+		<option value="combined">Combined</option>
+	</select>
+</fieldset>
+<!-- routine score -->
+<fieldset>
+	<label>Routine Score</label>
+	<input type="text" ng-model="routineScore" placeholder="score">
+</fieldset>
+
+<button type="submit">Add score to the database</button>
+
+</form>
+
 </div>

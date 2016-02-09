@@ -6,4 +6,8 @@ angular.module('acroScore.addScore', [
 // if there are factory dependencies, add function it depends on as a function argument
 .controller('AddScoreController', ['$scope', function($scope) {
 	console.log("inside AddScoreController");
+
+	$scope.addScoreToDatabase = function() {
+		console.log("adding score to database")
+	}
 }])
