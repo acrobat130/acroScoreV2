@@ -3,3 +3,6 @@
 
 # bower components
 client/bower_components/
+
+#node modules
+node_modules
