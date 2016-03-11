@@ -56,25 +56,25 @@
 
 	<!-- artistry score -->
 	<label>Artistry</label>
-	<input type="text" ng-model="artistryScore" placeholder="artistry">
+	<input type="number" ng-model="artistryScore" ng-init="artistryScore=0" ng-change = "updateScore()">
 
 	<!-- execution score -->
 	<label>Execution</label>
-	<input type="text" ng-model="executionScore" placeholder="execution">
+	<input type="number" ng-model="executionScore" ng-init="executionScore=0" ng-change = "updateScore()">
 
 	<!-- difficlty score -->
 	<label>Difficulty</label>
-	<input type="text" ng-model="difficultyScore" placeholder="difficulty">
+	<input type="number" ng-model="difficultyScore" ng-init="difficultyScore=0" ng-change = "updateScore()">
 
 	<!-- penalties (enter a positive number)-->
 	<label>Penalties (enter positive number)</label>
-	<input type="text" ng-model="penalties" placeholder="penalties">
+	<input type="number" ng-model="penalties" ng-init="penalties=0" ng-change = "updateScore()">
 
 	<br>
 
 	<!-- total score -->
 	<label>Total Routine Score</label>
-	<input type="text" ng-model="totalScore" placeholder="total score">
+	<input type="text" ng-model="totalScore" ng-init="totalScore=0" ng-change = "updateScore()">
 </fieldset>
 
 <button type="submit">Add score to the database</button>

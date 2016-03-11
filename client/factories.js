@@ -16,8 +16,9 @@ angular.module('acroScore.factories', [])
 			data: data
 		})
 		// return $http.post(url, data)
-		.then(function() {
+		.then(function(data) {
 			console.log("data successfully posted");
+			console.log("data returned from post", data)
 		})
 	}
 

@@ -7,8 +7,13 @@ angular.module('acroScore.addScore', [
 .controller('AddScoreController', ['$scope', 'getPostFactory', '$location', function($scope, getPostFactory, $location) {
 	console.log("inside AddScoreController");
 
+	$scope.updateScore = function() {
+		$scope.totalScore = $scope.artistryScore + $scope.executionScore + $scope.difficultyScore - $scope.penalties;
+	};
 
 	$scope.addScoreToDatabase = function() {
+	console.log("scope.totalScore", $scope.totalScore)
+
 		$scope.dataToSend = {
 			meetName: $scope.meetName,
 			groupNumber: $scope.groupNumber,

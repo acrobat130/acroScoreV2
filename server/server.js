@@ -74,7 +74,7 @@ app.post('/api/scores', function(req, res) {
 
 			}
 		);
-/*
+
 		var query = client.query('SELECT "groupNumber", "athlete1", "athlete2", "athlete3", "athlete4" FROM pairgroups');
 
 		// stream results back one row at a time
@@ -86,7 +86,7 @@ app.post('/api/scores', function(req, res) {
 			done();
 			return res.json(results);
 		})
-*/
+
 	})
 	// res.send("done")
 })
