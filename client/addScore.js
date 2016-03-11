@@ -7,14 +7,22 @@ angular.module('acroScore.addScore', [
 .controller('AddScoreController', ['$scope', 'getPostFactory', '$location', function($scope, getPostFactory, $location) {
 	console.log("inside AddScoreController");
 
-	$scope.addScoreToDatabase = function() {
-		console.log("adding score to database")
-		getPostFactory.test($scope)
-			// .then(function() {
-				alert("your score is being added to the acroScore database");
-				$location.path('/');
-			// })
 
+	$scope.addScoreToDatabase = function() {
+		$scope.dataToSend = {
+			meetName: $scope.meetName,
+			groupNumber: $scope.groupNumber,
+			athlete1: $scope.athlete1,
+			athlete2: $scope.athlete2,
+			athlete3: $scope.athlete3,
+			athlete4: $scope.athlete4
+		}
+
+		console.log("adding score to database")
+		getPostFactory.postScore($scope.dataToSend)
+		// getPostFactory.test($scope)
+		alert("your score is being added to the acroScore database");
+		$location.path('/');
 
 	}
 }])
