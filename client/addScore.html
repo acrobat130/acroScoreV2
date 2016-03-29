@@ -74,7 +74,7 @@
 
 	<!-- total score -->
 	<label>Total Routine Score</label>
-	<input type="text" ng-model="totalScore" ng-init="totalScore=0" ng-change = "updateScore()">
+	<input type="number" ng-model="totalScore" ng-init="totalScore=0" ng-blur="validateScore()">
 </fieldset>
 
 <button type="submit">Add score to the database</button>
