@@ -33,7 +33,14 @@ angular.module('acroScore.addScore', [
 			athlete1: $scope.athlete1,
 			athlete2: $scope.athlete2,
 			athlete3: $scope.athlete3,
-			athlete4: $scope.athlete4
+			athlete4: $scope.athlete4,
+			teamName: $scope.teamName,
+			routineType: $scope.routineType,
+			artistry: $scope.artistryScore,
+			execution: $scope.executionScore,
+			difficulty: $scope.difficultyScore,
+			penalties; $scope.penalties,
+			totalScore: $scope.totalScore
 		}
 
 		console.log("adding score to database")
