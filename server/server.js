@@ -62,7 +62,7 @@ app.post('/api/scores', function(req, res) {
 			});
 		};
 
-		// insert athlete names and group number into table
+		// insert athlete names and group number into pairgroups table
 		client.query('INSERT INTO pairgroups ("groupNumber", "athlete1", "athlete2", "athlete3", "athlete4") values ($1, $2, $3, $4, $5)',
 			[req.body.groupNumber, req.body.athlete1, req.body.athlete2, req.body.athlete3, req.body.athlete4],
 			function(err, result) {
@@ -75,6 +75,11 @@ app.post('/api/scores', function(req, res) {
 			}
 		);
 
+		// TODO: insert meet name into meets table if it's not already there
+
+		// TODO: insert routine type, artistry, execution, difficulty, penalties, total score into scores table
+
+		// select group number and athletes from pairgroups table
 		var query = client.query('SELECT "groupNumber", "athlete1", "athlete2", "athlete3", "athlete4" FROM pairgroups');
 
 		// stream results back one row at a time
