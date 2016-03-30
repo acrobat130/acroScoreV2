@@ -75,7 +75,8 @@ app.post('/api/scores', function(req, res) {
 			}
 		);
 
-		// TODO: insert meet name into meets table if it's not already there
+		// TODO: insert meet name and year into meets table if it's not already there
+		// client.query('INSERT INTO meets ()')
 
 		// TODO: insert routine type, artistry, execution, difficulty, penalties, total score into scores table
 
