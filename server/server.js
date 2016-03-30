@@ -61,10 +61,10 @@ app.post('/api/scores', function(req, res) {
 				data: err
 			});
 		};
-
+		// note on setting up primary auto-incrementing keys in pgadmin: http://dba.stackexchange.com/questions/1281/how-do-i-specify-that-a-column-should-be-auto-incremented-in-pgadmin
 		// insert athlete names and group number into pairgroups table
-		client.query('INSERT INTO pairgroups ("groupNumber", "athlete1", "athlete2", "athlete3", "athlete4") values ($1, $2, $3, $4, $5)',
-			[req.body.groupNumber, req.body.athlete1, req.body.athlete2, req.body.athlete3, req.body.athlete4],
+		client.query('INSERT INTO pairgroups ("athlete1", "athlete2", "athlete3", "athlete4", "teamName") values ($1, $2, $3, $4, $5)',
+			[req.body.athlete1, req.body.athlete2, req.body.athlete3, req.body.athlete4, req.body.teamName],
 			function(err, result) {
 				if (err) {
 					console.log('error in insert query', err);
@@ -81,7 +81,7 @@ app.post('/api/scores', function(req, res) {
 		// TODO: insert routine type, artistry, execution, difficulty, penalties, total score into scores table
 
 		// select group number and athletes from pairgroups table
-		var query = client.query('SELECT "groupNumber", "athlete1", "athlete2", "athlete3", "athlete4" FROM pairgroups');
+		var query = client.query('SELECT "athlete1", "athlete2", "athlete3", "athlete4", "teamName" FROM pairgroups');
 
 		// stream results back one row at a time
 		query.on('row', function(row) {
