@@ -7,6 +7,17 @@ angular.module('acroScore.addScore', [
 .controller('AddScoreController', ['$scope', 'getPostFactory', '$location', function($scope, getPostFactory, $location) {
 	console.log("inside AddScoreController");
 
+	// generates array of years for user to select when inputting meet name
+	$scope.yearRange = function() {
+		var yearsArray = [];
+		var startYear = 1960;
+		var endYear = new Date().getFullYear();
+		for (var i = endYear; i >= startYear; i--) {
+			yearsArray.push(i);
+		}
+		return yearsArray;
+	}
+
 	// updates total score when other score parameters are edited
 	$scope.updateScore = function() {
 		$scope.totalScore = $scope.artistryScore + $scope.executionScore + $scope.difficultyScore - $scope.penalties;
@@ -39,7 +50,7 @@ angular.module('acroScore.addScore', [
 			artistry: $scope.artistryScore,
 			execution: $scope.executionScore,
 			difficulty: $scope.difficultyScore,
-			penalties; $scope.penalties,
+			penalties: $scope.penalties,
 			totalScore: $scope.totalScore
 		}
 
