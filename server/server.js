@@ -87,6 +87,11 @@ app.post('/api/scores', function(req, res) {
 
 		// TODO: insert routine type, artistry, execution, difficulty, penalties, total score into scores table
 
+		// TODO: store current athlete names from req.body.athlete1-4
+		//
+		// TODO: rewrite this query to select all score info from scores table inner join pairgroups table on column = column where pairgroupsid = pairgroups primary key
+			// + select meet info from meets table inner join scores table on column = column where meetid = meet primary key
+			// + select pairgroup info from pairgroups table inner join scores table on column = column where pairgroupid = pairgroup primary key
 		// select group number and athletes from pairgroups table
 		var query = client.query('SELECT "athlete1", "athlete2", "athlete3", "athlete4", "teamName" FROM pairgroups');
 
