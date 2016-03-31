@@ -64,6 +64,19 @@ app.post('/api/scores', function(req, res) {
 		// note on setting up primary auto-incrementing keys in pgadmin: http://dba.stackexchange.com/questions/1281/how-do-i-specify-that-a-column-should-be-auto-incremented-in-pgadmin
 
 		// TODO: insert meet name and year into meets table if it's not already there
+		var existingMeetNameID;
+
+		client.query('SELECT "meetID" FROM "meetNames" WHERE "meetName" = $1', [req.body.meetName],
+			function(err, result) {
+				if (err) {
+					console.log('error in query getting existingMeetNameID', err);
+				} else {
+					existingMeetNameID = result.rows[0].meetID // returns a number
+					console.log("existingMeetNameID", existingMeetNameID)
+				}
+			}); // returns an object if nothing is found
+
+
 		client.query('INSERT INTO "meetNames" ("meetName", "meetYear") values ($1, $2)',
 			[req.body.meetName, req.body.year],
 			function(err, result) {
@@ -89,6 +102,7 @@ app.post('/api/scores', function(req, res) {
 		);
 
 		// TODO: get primary key from meets table
+		// var meetNamesPrimaryKey = client.query('SELECT "meetID" FROM "meetNames" WHERE ')
 
 		// TODO: get primary key from pairgroups table
 
