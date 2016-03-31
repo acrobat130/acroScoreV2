@@ -62,6 +62,10 @@ app.post('/api/scores', function(req, res) {
 			});
 		};
 		// note on setting up primary auto-incrementing keys in pgadmin: http://dba.stackexchange.com/questions/1281/how-do-i-specify-that-a-column-should-be-auto-incremented-in-pgadmin
+
+		// TODO: insert meet name and year into meets table if it's not already there
+		// client.query('INSERT INTO meets ()')
+
 		// insert athlete names and group number into pairgroups table
 		client.query('INSERT INTO pairgroups ("athlete1", "athlete2", "athlete3", "athlete4", "teamName") values ($1, $2, $3, $4, $5)',
 			[req.body.athlete1, req.body.athlete2, req.body.athlete3, req.body.athlete4, req.body.teamName],
@@ -75,8 +79,11 @@ app.post('/api/scores', function(req, res) {
 			}
 		);
 
-		// TODO: insert meet name and year into meets table if it's not already there
-		// client.query('INSERT INTO meets ()')
+		// TODO: get primary key from meets table
+
+		// TODO: get primary key from pairgroups table
+
+		// TODO: insert meet and pairgroup foreign keys into junction table
 
 		// TODO: insert routine type, artistry, execution, difficulty, penalties, total score into scores table
 
