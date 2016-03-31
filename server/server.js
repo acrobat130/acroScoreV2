@@ -64,16 +64,25 @@ app.post('/api/scores', function(req, res) {
 		// note on setting up primary auto-incrementing keys in pgadmin: http://dba.stackexchange.com/questions/1281/how-do-i-specify-that-a-column-should-be-auto-incremented-in-pgadmin
 
 		// TODO: insert meet name and year into meets table if it's not already there
-		// client.query('INSERT INTO meets ()')
+		client.query('INSERT INTO "meetNames" ("meetName", "meetYear") values ($1, $2)',
+			[req.body.meetName, req.body.year],
+			function(err, result) {
+				if (err) {
+					console.log('error in insert query for meetNames table', err);
+				} else {
+					console.log('data inserted into meetNames table');
+				}
+			}
+		);
 
 		// insert athlete names and group number into pairgroups table
 		client.query('INSERT INTO pairgroups ("athlete1", "athlete2", "athlete3", "athlete4", "teamName") values ($1, $2, $3, $4, $5)',
 			[req.body.athlete1, req.body.athlete2, req.body.athlete3, req.body.athlete4, req.body.teamName],
 			function(err, result) {
 				if (err) {
-					console.log('error in insert query', err);
+					console.log('error in insert query for pairgroups table', err);
 				} else {
-					console.log('data inserted into table')
+					console.log('data inserted into pairgroups table');
 				}
 
 			}
