@@ -40,6 +40,7 @@ angular.module('acroScore.addScore', [
 
 		$scope.dataToSend = {
 			meetName: $scope.meetName,
+			year: $scope.year,
 			// groupNumber: $scope.groupNumber,
 			athlete1: $scope.athlete1,
 			athlete2: $scope.athlete2,
