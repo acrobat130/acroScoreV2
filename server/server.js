@@ -198,7 +198,7 @@ app.post('/api/scores', function(req, res) {
 						console.log('meet data already exists in meetNames table')
 						// store meet id from database
 						var existingMeetNameID = result.rows[0].meetID // returns a number
-//==================
+
 						// select current pairgroupID // note: putting the query string on multiple lines throws an error from whitespace
 						client.query('SELECT "pairgroupsID" FROM "pairgroups" WHERE "athlete1" = $1 OR "athlete2" = $1 OR "athlete3" = $1 OR "athlete4" = $1 AND "athlete1" = $2 OR "athlete2" = $2 OR "athlete3" = $2 OR "athlete4" = $2 AND "athlete1" = $3 OR "athlete3" = $3 OR "athlete3" = $3 OR "athlete4" = $3 AND "athlete1" = $4 OR "athlete4" = $4 OR "athlete3" = $4 OR "athlete4" = $4',
 							[req.body.athlete1, req.body.athlete2, req.body.athlete3, req.body.athlete4],
@@ -302,18 +302,8 @@ app.post('/api/scores', function(req, res) {
 			}
 		);
 
-
-		// TODO: get primary key from meets table
-		// var meetNamesPrimaryKey = client.query('SELECT "meetID" FROM "meetNames" WHERE ')
-
-		// TODO: get primary key from pairgroups table
-
-		// TODO: insert meet and pairgroup foreign keys into junction table
-
 		// TODO: insert routine type, artistry, execution, difficulty, penalties, total score into scores table
 
-		// TODO: store current athlete names from req.body.athlete1-4
-		//
 		// TODO: rewrite this query to select all score info from scores table inner join pairgroups table on column = column where pairgroupsid = pairgroups primary key
 			// + select meet info from meets table inner join scores table on column = column where meetid = meet primary key
 			// + select pairgroup info from pairgroups table inner join scores table on column = column where pairgroupid = pairgroup primary key
