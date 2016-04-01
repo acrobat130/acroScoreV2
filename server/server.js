@@ -63,17 +63,14 @@ app.post('/api/scores', function(req, res) {
 		};
 		// note on setting up primary auto-incrementing keys in pgadmin: http://dba.stackexchange.com/questions/1281/how-do-i-specify-that-a-column-should-be-auto-incremented-in-pgadmin
 
-
+		// TODO: modify this select query to select where name AND year matches the meet name and year input
 		// insert meet name and year into meets table if it's not already there
 		client.query('SELECT "meetID" FROM "meetNames" WHERE "meetName" = $1', [req.body.meetName],
 			function(err, result) {
 				if (err) {
 					console.log('error in query getting existingMeetNameID', err);
 				} else {
-					// store meet id from database
-					// var existingMeetNameID = result.rows[0].meetID // returns a number
-					// if id isn't found, meet name isn't in table yet
-					console.log("result.rows[0]", result.rows[0])
+					// if result doesn't have any rows, meet name isn't in table yet
 					if (result.rows[0] === undefined) {
 						// insert into meets table
 						client.query('INSERT INTO "meetNames" ("meetName", "meetYear") values ($1, $2)',
@@ -116,6 +113,51 @@ app.post('/api/scores', function(req, res) {
 														}
 													}
 												);
+											}
+										}
+									);
+								}
+							}
+						);
+					// else meet is already in table
+					} else {
+						// store meet id from database
+						var existingMeetNameID = result.rows[0].meetID // returns a number
+
+						// select current pairgroupID // note: putting the query string on multiple lines throws an error from whitespace
+						client.query('SELECT "pairgroupsID" FROM "pairgroups" WHERE "athlete1" = $1 OR "athlete2" = $1 OR "athlete3" = $1 OR "athlete4" = $1 AND "athlete1" = $2 OR "athlete2" = $2 OR "athlete3" = $2 OR "athlete4" = $2 AND "athlete1" = $3 OR "athlete3" = $3 OR "athlete3" = $3 OR "athlete4" = $3 AND "athlete1" = $4 OR "athlete4" = $4 OR "athlete3" = $4 OR "athlete4" = $4',
+							[req.body.athlete1, req.body.athlete2, req.body.athlete3, req.body.athlete4],
+							function(err, result) {
+								if (err) {
+									console.log('error in query getting pairgroupsID', err);
+								} else {
+									// store pairgroupsID from database
+									var pairgroupsID = result.rows[0].pairgroupsID;
+
+									// insert meet id and pairgroupsID into junction table if it's not already there
+									client.query('SELECT "pk_junctionid" FROM "junction_meets-pairgroups" WHERE "meetID" = $1 AND "pairgroupID" = $2',
+										[existingMeetNameID, pairgroupsID],
+										function(err, result) {
+											if (err) {
+												console.log('error in query selecting IDs from junction table', err);
+											} else {
+												// if there are no rows in result, then the ids aren't in table yet
+												if (result.rows[0] === undefined) {
+													// meet id and pairgroupsID not already there, so insert into junction table
+													client.query('INSERT INTO "junction_meets-pairgroups" ("meetID", "pairgroupID") values ($1, $2)',
+														[existingMeetNameID, pairgroupsID],
+														function(err, result) {
+															if (err) {
+																console.log('error in query inserting IDs into junction table', err);
+															} else {
+																console.log('data inserted into junction table')
+															}
+														}
+													);
+												} else {
+													// id's are already in table
+													console.log('that data already exists in junction table');
+												}
 											}
 										}
 									);
