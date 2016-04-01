@@ -308,7 +308,8 @@ app.post('/api/scores', function(req, res) {
 			// + select meet info from meets table inner join scores table on column = column where meetid = meet primary key
 			// + select pairgroup info from pairgroups table inner join scores table on column = column where pairgroupid = pairgroup primary key
 		// select group number and athletes from pairgroups table
-		var query = client.query('SELECT "athlete1", "athlete2", "athlete3", "athlete4", "teamName" FROM pairgroups');
+		var query = client.query('SELECT * FROM "pairgroups" WHERE "athlete1" = $1 OR "athlete2" = $1 OR "athlete3" = $1 OR "athlete4" = $1 AND "athlete1" = $2 OR "athlete2" = $2 OR "athlete3" = $2 OR "athlete4" = $2 AND "athlete1" = $3 OR "athlete3" = $3 OR "athlete3" = $3 OR "athlete4" = $3 AND "athlete1" = $4 OR "athlete4" = $4 OR "athlete3" = $4 OR "athlete4" = $4',
+			[req.body.athlete1, req.body.athlete2, req.body.athlete3, req.body.athlete4]);
 
 		// stream results back one row at a time
 		query.on('row', function(row) {
