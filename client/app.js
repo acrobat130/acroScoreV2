@@ -2,7 +2,7 @@
 angular.module('acroScore', [
 	// add dependencies here
 	'ui.router',
-	'acroScore.addScore'
+	'acroScore.addScore',
 	'acroScore.viewScores'
 	])
 

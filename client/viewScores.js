@@ -6,3 +6,4 @@ angular.module('acroScore.viewScores', [
 // if there are factory dependencies, add function it depends on as a function argument
 .controller('ViewScoresController', ['$scope', 'getPostFactory', '$location', function($scope, getPostFactory, $location) {
 	console.log("inside ViewScoresController");
+}])
