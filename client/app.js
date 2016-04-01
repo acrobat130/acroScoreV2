@@ -3,6 +3,7 @@ angular.module('acroScore', [
 	// add dependencies here
 	'ui.router',
 	'acroScore.addScore'
+	'acroScore.viewScores'
 	])
 
 // config adds states that correspond with templates and controllers for each view
@@ -21,5 +22,10 @@ angular.module('acroScore', [
 				url: '/addScore',
 				templateUrl: 'addScore.html',
 				controller: 'AddScoreController'
+			})
+			.state('viewScores', {
+				url: '/viewScores',
+				templateUrl: 'viewScores.html',
+				controller: 'ViewScoresController'
 			})
 	}])
