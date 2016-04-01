@@ -3,6 +3,7 @@ angular.module('acroScore.factories', [])
 .factory('getPostFactory', ['$http', function($http){
 	// return console.log("inside the getPostFactory")
 	var url = '/api/scores';
+	var groupJustPosted = {};
 
 	var consoleSomething = function(scoreInfoFromUserInput) {
 		console.log("inside getPostFactory");
@@ -16,14 +17,17 @@ angular.module('acroScore.factories', [])
 			data: data
 		})
 		// return $http.post(url, data)
-		.then(function(data) {
+		.then(function(response) {
 			console.log("data successfully posted");
-			console.log("data returned from post", data)
+			console.log("response returned from post", response)
+			groupJustPosted.data = response.data;
+			return response.data;
 		})
 	}
 
 	return {
 		test: consoleSomething,
-		postScore: postScore
+		postScore: postScore,
+		groupJustPosted: groupJustPosted
 	};
 }])

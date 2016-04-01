@@ -36,7 +36,7 @@ angular.module('acroScore.addScore', [
 	}
 
 	$scope.addScoreToDatabase = function() {
-	console.log("scope.totalScore", $scope.totalScore)
+		// console.log("scope.totalScore", $scope.totalScore)
 
 		$scope.dataToSend = {
 			meetName: $scope.meetName,
@@ -56,10 +56,13 @@ angular.module('acroScore.addScore', [
 		}
 
 		console.log("adding score to database")
-		getPostFactory.postScore($scope.dataToSend)
-		// getPostFactory.test($scope)
 		alert("your score is being added to the acroScore database");
-		$location.path('/');
+		getPostFactory.postScore($scope.dataToSend).then(function(dataFromFactory) {
+			$location.path('/viewScores');
+			// console.log("getPostFactory.scoreJustPosted",getPostFactory.scoreJustPosted)
+			// $scope.returnedData = dataFromFactory;
+		})
+		// getPostFactory.test($scope)
 
 	}
 }])
