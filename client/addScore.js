@@ -48,8 +48,8 @@ angular.module('acroScore.addScore', [
 			athlete4: $scope.athlete4,
 			teamName: $scope.teamName,
 			routineType: $scope.routineType,
-			artistry: $scope.artistryScore,
 			execution: $scope.executionScore,
+			artistry: $scope.artistryScore,
 			difficulty: $scope.difficultyScore,
 			penalties: $scope.penalties,
 			totalScore: $scope.totalScore
