@@ -155,6 +155,18 @@ app.post('/api/scores', function(req, res) {
 																						console.log('error in query inserting into scores table', err);
 																					} else {
 																						console.log('data inserted into scores table');
+																						// sent back all scores from selected pairgroup
+																						var resultsQuery = client.query('SELECT * FROM "scores" INNER JOIN pairgroups ON scores.pairgroup_id = pairgroups.pairgroups_id INNER JOIN "meetNames" ON scores."meetID" = "meetNames"."meetID" WHERE scores.pairgroup_id = $1',
+																							[pairgroupsID]);
+
+																						resultsQuery.on('row', function(row) {
+																							results.push(row);
+																						});
+
+																						resultsQuery.on('end', function() {
+																							done();
+																							return res.json(results);
+																						});
 																					}
 																				}
 																			);
@@ -205,6 +217,18 @@ app.post('/api/scores', function(req, res) {
 																console.log('error in query inserting into scores table', err);
 															} else {
 																console.log('data inserted into scores table');
+																// send back all scores from selected pairgroup
+																var resultsQuery = client.query('SELECT * FROM "scores" INNER JOIN pairgroups ON scores.pairgroup_id = pairgroups.pairgroups_id INNER JOIN "meetNames" ON scores."meetID" = "meetNames"."meetID" WHERE scores.pairgroup_id = $1',
+																	[pairgroupsID]);
+
+																resultsQuery.on('row', function(row) {
+																	results.push(row);
+																});
+
+																resultsQuery.on('end', function() {
+																	done();
+																	return res.json(results);
+																});
 															}
 														}
 													);
@@ -284,6 +308,18 @@ app.post('/api/scores', function(req, res) {
 																			console.log('error in query inserting into scores table', err);
 																		} else {
 																			console.log('data inserted into scores table');
+																			// send back all scores from selected pairgroup
+																			var resultsQuery = client.query('SELECT * FROM "scores" INNER JOIN pairgroups ON scores.pairgroup_id = pairgroups.pairgroups_id INNER JOIN "meetNames" ON scores."meetID" = "meetNames"."meetID" WHERE scores.pairgroup_id = $1',
+																				[pairgroupsID]);
+
+																			resultsQuery.on('row', function(row) {
+																				results.push(row);
+																			});
+
+																			resultsQuery.on('end', function() {
+																				done();
+																				return res.json(results);
+																			});
 																		}
 																	}
 																);
@@ -334,18 +370,18 @@ app.post('/api/scores', function(req, res) {
 													console.log('error in query inserting into scores table', err);
 												} else {
 													console.log('data inserted into scores table');
-													// //============= return data
-													// var resultsQuery = client.query('SELECT * FROM "scores" INNER JOIN scores."pairgroupID" ON pairgroups."pairgroupsID" INNER JOIN scores."meetID" ON "meetNames"."meetName" WHERE scores."pairgroupID" = $1',
-													// 	[pairgroupsID]);
+													// send back all scores from selected pairgroup
+													var resultsQuery = client.query('SELECT * FROM "scores" INNER JOIN pairgroups ON scores.pairgroup_id = pairgroups.pairgroups_id INNER JOIN "meetNames" ON scores."meetID" = "meetNames"."meetID" WHERE scores.pairgroup_id = $1',
+														[pairgroupsID]);
 
-													// resultsQuery.on('row', function(row) {
-													// 	results.push(row);
-													// });
+													resultsQuery.on('row', function(row) {
+														results.push(row);
+													});
 
-													// resultsQuery.on('end', function() {
-													// 	done();
-													// 	return res.json(results);
-													// })
+													resultsQuery.on('end', function() {
+														done();
+														return res.json(results);
+													});
 												}
 											}
 										);
@@ -376,18 +412,18 @@ app.post('/api/scores', function(req, res) {
 		// 	return res.json(results);
 		// })
 		//============= return data
-		var pairgroupsID = 3;
-		var resultsQuery = client.query('SELECT * FROM "scores" INNER JOIN pairgroups ON scores.pairgroup_id = pairgroups.pairgroups_id INNER JOIN "meetNames" ON scores."meetID" = "meetNames"."meetID" WHERE scores.pairgroup_id = $1',
-			[pairgroupsID]);
+		// var pairgroupsID = 3;
+		// var resultsQuery = client.query('SELECT * FROM "scores" INNER JOIN pairgroups ON scores.pairgroup_id = pairgroups.pairgroups_id INNER JOIN "meetNames" ON scores."meetID" = "meetNames"."meetID" WHERE scores.pairgroup_id = $1',
+		// 	[pairgroupsID]);
 
-		resultsQuery.on('row', function(row) {
-			results.push(row);
-		});
+		// resultsQuery.on('row', function(row) {
+		// 	results.push(row);
+		// });
 
-		resultsQuery.on('end', function() {
-			done();
-			return res.json(results);
-		})
+		// resultsQuery.on('end', function() {
+		// 	done();
+		// 	return res.json(results);
+		// });
 
 	})
 	// res.send("done")
