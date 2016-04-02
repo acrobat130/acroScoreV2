@@ -93,11 +93,11 @@ app.post('/api/scores', function(req, res) {
 									var meetNameID = result.rows[0].meetID;
 
 									// select current pairgroupID // note: putting the query string on multiple lines throws an error from whitespace
-									client.query('SELECT "pairgroupsID" FROM "pairgroups" WHERE "athlete1" = $1 OR "athlete2" = $1 OR "athlete3" = $1 OR "athlete4" = $1 AND "athlete1" = $2 OR "athlete2" = $2 OR "athlete3" = $2 OR "athlete4" = $2 AND "athlete1" = $3 OR "athlete3" = $3 OR "athlete3" = $3 OR "athlete4" = $3 AND "athlete1" = $4 OR "athlete4" = $4 OR "athlete3" = $4 OR "athlete4" = $4',
+									client.query('SELECT "pairgroups_id" FROM "pairgroups" WHERE "athlete1" = $1 OR "athlete2" = $1 OR "athlete3" = $1 OR "athlete4" = $1 AND "athlete1" = $2 OR "athlete2" = $2 OR "athlete3" = $2 OR "athlete4" = $2 AND "athlete1" = $3 OR "athlete3" = $3 OR "athlete3" = $3 OR "athlete4" = $3 AND "athlete1" = $4 OR "athlete4" = $4 OR "athlete3" = $4 OR "athlete4" = $4',
 										[req.body.athlete1, req.body.athlete2, req.body.athlete3, req.body.athlete4],
 										function(err, result) {
 											if (err) {
-												console.log('error in query getting pairgroupsID', err);
+												console.log('error in query getting pairgroups_id', err);
 											} else {
 												// if result doesn't have rows, then pairgroup isn't in table yet
 												if (result.rows[0] === undefined) {
@@ -111,14 +111,14 @@ app.post('/api/scores', function(req, res) {
 															} else {
 																console.log('data inserted into pairgroups table');
 																// select current pairgroupID // note: putting the query string on multiple lines throws an error from whitespace
-																client.query('SELECT "pairgroupsID" FROM "pairgroups" WHERE "athlete1" = $1 OR "athlete2" = $1 OR "athlete3" = $1 OR "athlete4" = $1 AND "athlete1" = $2 OR "athlete2" = $2 OR "athlete3" = $2 OR "athlete4" = $2 AND "athlete1" = $3 OR "athlete3" = $3 OR "athlete3" = $3 OR "athlete4" = $3 AND "athlete1" = $4 OR "athlete4" = $4 OR "athlete3" = $4 OR "athlete4" = $4',
+																client.query('SELECT "pairgroups_id" FROM "pairgroups" WHERE "athlete1" = $1 OR "athlete2" = $1 OR "athlete3" = $1 OR "athlete4" = $1 AND "athlete1" = $2 OR "athlete2" = $2 OR "athlete3" = $2 OR "athlete4" = $2 AND "athlete1" = $3 OR "athlete3" = $3 OR "athlete3" = $3 OR "athlete4" = $3 AND "athlete1" = $4 OR "athlete4" = $4 OR "athlete3" = $4 OR "athlete4" = $4',
 																	[req.body.athlete1, req.body.athlete2, req.body.athlete3, req.body.athlete4],
 																	function(err, result) {
 																		if (err) {
-																			console.log('error in query getting pairgroupsID', err);
+																			console.log('error in query getting pairgroups_id', err);
 																		} else {
-																			// store pairgroupsID from database
-																			var pairgroupsID = result.rows[0].pairgroupsID;
+																			// store pairgroups_id from database
+																			var pairgroupsID = result.rows[0].pairgroups_id;
 
 																			// insert meet id and pairgroupsID into junction table if it's not already there
 																			client.query('SELECT "pk_junctionid" FROM "junction_meets-pairgroups" WHERE "meetID" = $1 AND "pairgroupID" = $2',
@@ -148,7 +148,7 @@ app.post('/api/scores', function(req, res) {
 																				}
 																			);
 																			// insert everything into scores table
-																			client.query('INSERT INTO "scores" ("routineType", "artistry", "execution", "difficulty", "penalties", "total", "pairgroupID", "meetID") values ($1, $2, $3, $4, $5, $6, $7, $8)',
+																			client.query('INSERT INTO "scores" ("routineType", "artistry", "execution", "difficulty", "penalties", "total", "pairgroup_id", "meetID") values ($1, $2, $3, $4, $5, $6, $7, $8)',
 																				[req.body.routineType, req.body.artistry, req.body.execution, req.body.difficulty, req.body.penalties, req.body.totalScore, pairgroupsID, meetNameID],
 																				function(err, result) {
 																					if (err) {
@@ -168,7 +168,7 @@ app.post('/api/scores', function(req, res) {
 													// pairgroup is already in table
 													console.log('that data already exists in pairgroups table')
 													// store pairgroupsID from database
-													var pairgroupsID = result.rows[0].pairgroupsID;
+													var pairgroupsID = result.rows[0].pairgroups_id;
 
 													// insert meet id and pairgroupsID into junction table if it's not already there
 													client.query('SELECT "pk_junctionid" FROM "junction_meets-pairgroups" WHERE "meetID" = $1 AND "pairgroupID" = $2',
@@ -198,7 +198,7 @@ app.post('/api/scores', function(req, res) {
 														}
 													);
 													// insert everything into scores table
-													client.query('INSERT INTO "scores" ("routineType", "artistry", "execution", "difficulty", "penalties", "total", "pairgroupID", "meetID") values ($1, $2, $3, $4, $5, $6, $7, $8)',
+													client.query('INSERT INTO "scores" ("routineType", "artistry", "execution", "difficulty", "penalties", "total", "pairgroup_id", "meetID") values ($1, $2, $3, $4, $5, $6, $7, $8)',
 														[req.body.routineType, req.body.artistry, req.body.execution, req.body.difficulty, req.body.penalties, req.body.totalScore, pairgroupsID, meetNameID],
 														function(err, result) {
 															if (err) {
@@ -222,11 +222,11 @@ app.post('/api/scores', function(req, res) {
 						var existingMeetNameID = result.rows[0].meetID // returns a number
 
 						// select current pairgroupID // note: putting the query string on multiple lines throws an error from whitespace
-						client.query('SELECT "pairgroupsID" FROM "pairgroups" WHERE "athlete1" = $1 OR "athlete2" = $1 OR "athlete3" = $1 OR "athlete4" = $1 AND "athlete1" = $2 OR "athlete2" = $2 OR "athlete3" = $2 OR "athlete4" = $2 AND "athlete1" = $3 OR "athlete3" = $3 OR "athlete3" = $3 OR "athlete4" = $3 AND "athlete1" = $4 OR "athlete4" = $4 OR "athlete3" = $4 OR "athlete4" = $4',
+						client.query('SELECT "pairgroups_id" FROM "pairgroups" WHERE "athlete1" = $1 OR "athlete2" = $1 OR "athlete3" = $1 OR "athlete4" = $1 AND "athlete1" = $2 OR "athlete2" = $2 OR "athlete3" = $2 OR "athlete4" = $2 AND "athlete1" = $3 OR "athlete3" = $3 OR "athlete3" = $3 OR "athlete4" = $3 AND "athlete1" = $4 OR "athlete4" = $4 OR "athlete3" = $4 OR "athlete4" = $4',
 							[req.body.athlete1, req.body.athlete2, req.body.athlete3, req.body.athlete4],
 							function(err, result) {
 								if (err) {
-									console.log('error in query getting pairgroupsID', err);
+									console.log('error in query getting pairgroups_id', err);
 								} else {
 									// if result doesn't have rows, then pairgroup isn't in table yet
 									if (result.rows[0] === undefined) {
@@ -240,14 +240,14 @@ app.post('/api/scores', function(req, res) {
 												} else {
 													console.log('data inserted into pairgroups table');
 													// select current pairgroupID // note: putting the query string on multiple lines throws an error from whitespace
-													client.query('SELECT "pairgroupsID" FROM "pairgroups" WHERE "athlete1" = $1 OR "athlete2" = $1 OR "athlete3" = $1 OR "athlete4" = $1 AND "athlete1" = $2 OR "athlete2" = $2 OR "athlete3" = $2 OR "athlete4" = $2 AND "athlete1" = $3 OR "athlete3" = $3 OR "athlete3" = $3 OR "athlete4" = $3 AND "athlete1" = $4 OR "athlete4" = $4 OR "athlete3" = $4 OR "athlete4" = $4',
+													client.query('SELECT "pairgroups_id" FROM "pairgroups" WHERE "athlete1" = $1 OR "athlete2" = $1 OR "athlete3" = $1 OR "athlete4" = $1 AND "athlete1" = $2 OR "athlete2" = $2 OR "athlete3" = $2 OR "athlete4" = $2 AND "athlete1" = $3 OR "athlete3" = $3 OR "athlete3" = $3 OR "athlete4" = $3 AND "athlete1" = $4 OR "athlete4" = $4 OR "athlete3" = $4 OR "athlete4" = $4',
 														[req.body.athlete1, req.body.athlete2, req.body.athlete3, req.body.athlete4],
 														function(err, result) {
 															if (err) {
-																console.log('error in query getting pairgroupsID', err);
+																console.log('error in query getting pairgroups_id', err);
 															} else {
 																// store pairgroupsID from database
-																var pairgroupsID = result.rows[0].pairgroupsID;
+																var pairgroupsID = result.rows[0].pairgroups_id;
 
 																// insert meet id and pairgroupsID into junction table if it's not already there
 																client.query('SELECT "pk_junctionid" FROM "junction_meets-pairgroups" WHERE "meetID" = $1 AND "pairgroupID" = $2',
@@ -277,7 +277,7 @@ app.post('/api/scores', function(req, res) {
 																	}
 																);
 																// insert everything into scores table
-																client.query('INSERT INTO "scores" ("routineType", "artistry", "execution", "difficulty", "penalties", "total", "pairgroupID", "meetID") values ($1, $2, $3, $4, $5, $6, $7, $8)',
+																client.query('INSERT INTO "scores" ("routineType", "artistry", "execution", "difficulty", "penalties", "total", "pairgroup_id", "meetID") values ($1, $2, $3, $4, $5, $6, $7, $8)',
 																	[req.body.routineType, req.body.artistry, req.body.execution, req.body.difficulty, req.body.penalties, req.body.totalScore, pairgroupsID, existingMeetNameID],
 																	function(err, result) {
 																		if (err) {
@@ -297,7 +297,7 @@ app.post('/api/scores', function(req, res) {
 										// pairgroup is already in table
 										console.log('that data already exists in pairgroups table')
 										// store pairgroupsID from database
-										var pairgroupsID = result.rows[0].pairgroupsID;
+										var pairgroupsID = result.rows[0].pairgroups_id;
 
 										// insert meet id and pairgroupsID into junction table if it's not already there
 										client.query('SELECT "pk_junctionid" FROM "junction_meets-pairgroups" WHERE "meetID" = $1 AND "pairgroupID" = $2',
@@ -327,13 +327,25 @@ app.post('/api/scores', function(req, res) {
 											}
 										);
 										// insert everything into scores table
-										client.query('INSERT INTO "scores" ("routineType", "artistry", "execution", "difficulty", "penalties", "total", "pairgroupID", "meetID") values ($1, $2, $3, $4, $5, $6, $7, $8)',
+										client.query('INSERT INTO "scores" ("routineType", "artistry", "execution", "difficulty", "penalties", "total", "pairgroup_id", "meetID") values ($1, $2, $3, $4, $5, $6, $7, $8)',
 											[req.body.routineType, req.body.artistry, req.body.execution, req.body.difficulty, req.body.penalties, req.body.totalScore, pairgroupsID, existingMeetNameID],
 											function(err, result) {
 												if (err) {
 													console.log('error in query inserting into scores table', err);
 												} else {
 													console.log('data inserted into scores table');
+													// //============= return data
+													// var resultsQuery = client.query('SELECT * FROM "scores" INNER JOIN scores."pairgroupID" ON pairgroups."pairgroupsID" INNER JOIN scores."meetID" ON "meetNames"."meetName" WHERE scores."pairgroupID" = $1',
+													// 	[pairgroupsID]);
+
+													// resultsQuery.on('row', function(row) {
+													// 	results.push(row);
+													// });
+
+													// resultsQuery.on('end', function() {
+													// 	done();
+													// 	return res.json(results);
+													// })
 												}
 											}
 										);
@@ -351,15 +363,28 @@ app.post('/api/scores', function(req, res) {
 			// + select meet info from meets table inner join scores table on column = column where meetid = meet primary key
 			// + select pairgroup info from pairgroups table inner join scores table on column = column where pairgroupid = pairgroup primary key
 		// select group number and athletes from pairgroups table
-		var query = client.query('SELECT * FROM "pairgroups" WHERE "athlete1" = $1 OR "athlete2" = $1 OR "athlete3" = $1 OR "athlete4" = $1 AND "athlete1" = $2 OR "athlete2" = $2 OR "athlete3" = $2 OR "athlete4" = $2 AND "athlete1" = $3 OR "athlete3" = $3 OR "athlete3" = $3 OR "athlete4" = $3 AND "athlete1" = $4 OR "athlete4" = $4 OR "athlete3" = $4 OR "athlete4" = $4',
-			[req.body.athlete1, req.body.athlete2, req.body.athlete3, req.body.athlete4]);
+		// var query = client.query('SELECT * FROM "pairgroups" WHERE "athlete1" = $1 OR "athlete2" = $1 OR "athlete3" = $1 OR "athlete4" = $1 AND "athlete1" = $2 OR "athlete2" = $2 OR "athlete3" = $2 OR "athlete4" = $2 AND "athlete1" = $3 OR "athlete3" = $3 OR "athlete3" = $3 OR "athlete4" = $3 AND "athlete1" = $4 OR "athlete4" = $4 OR "athlete3" = $4 OR "athlete4" = $4',
+		// 	[req.body.athlete1, req.body.athlete2, req.body.athlete3, req.body.athlete4]);
 
-		// stream results back one row at a time
-		query.on('row', function(row) {
+		// // stream results back one row at a time
+		// query.on('row', function(row) {
+		// 	results.push(row);
+		// });
+
+		// query.on('end', function() {
+		// 	done();
+		// 	return res.json(results);
+		// })
+		//============= return data
+		var pairgroupsID = 3;
+		var resultsQuery = client.query('SELECT * FROM "scores" INNER JOIN pairgroups ON scores.pairgroup_id = pairgroups.pairgroups_id INNER JOIN "meetNames" ON scores."meetID" = "meetNames"."meetID" WHERE scores.pairgroup_id = $1',
+			[pairgroupsID]);
+
+		resultsQuery.on('row', function(row) {
 			results.push(row);
 		});
 
-		query.on('end', function() {
+		resultsQuery.on('end', function() {
 			done();
 			return res.json(results);
 		})
