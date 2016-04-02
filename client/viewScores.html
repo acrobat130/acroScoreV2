@@ -1,10 +1,19 @@
 <div>
+	<h4>
+		<span>{{groupJustPosted.data[0].athlete1}}</span>
+		<span>, {{groupJustPosted.data[0].athlete2}}</span>
+		<span ng-show="thirdAthlete">, {{groupJustPosted.data[0].athlete3}}</span>
+		<span ng-show="fourthAthlete">, {{groupJustPosted.data[0].athlete4}}</span>
+	</h4>
+	table headers
 	<div ng-repeat="score in groupJustPosted.data">
-		<h4>Athletes:</h4>
+		meet, level/age group, score info
+
+		<!-- <h4>{{score.meetName}}</h4>
 		<p>{{score.athlete1}}, {{score.athlete2}}, {{score.athlete3}}, {{score.athlete4}}</p>
 		<h4>Team:</h4>
 		<p>{{score.teamName}}</p>
-		<hr>
+		<hr> -->
 	</div>
 
 
