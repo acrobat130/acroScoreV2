@@ -136,7 +136,7 @@ app.post('/api/scores', function(req, res) {
 																									if (err) {
 																										console.log('error in query inserting IDs into junction table', err);
 																									} else {
-																										console.log('data inserted into junction table')
+																										console.log('data inserted into junction table');
 																									}
 																								}
 																							);
@@ -144,6 +144,17 @@ app.post('/api/scores', function(req, res) {
 																							// id's are already in table
 																							console.log('that data already exists in junction table');
 																						}
+																					}
+																				}
+																			);
+																			// insert everything into scores table
+																			client.query('INSERT INTO "scores" ("routineType", "artistry", "execution", "difficulty", "penalties", "total", "pairgroupID", "meetID") values ($1, $2, $3, $4, $5, $6, $7, $8)',
+																				[req.body.routineType, req.body.artistry, req.body.execution, req.body.difficulty, req.body.penalties, req.body.totalScore, pairgroupsID, meetNameID],
+																				function(err, result) {
+																					if (err) {
+																						console.log('error in query inserting into scores table', err);
+																					} else {
+																						console.log('data inserted into scores table');
 																					}
 																				}
 																			);
@@ -183,6 +194,17 @@ app.post('/api/scores', function(req, res) {
 																	// id's are already in table
 																	console.log('that data already exists in junction table');
 																}
+															}
+														}
+													);
+													// insert everything into scores table
+													client.query('INSERT INTO "scores" ("routineType", "artistry", "execution", "difficulty", "penalties", "total", "pairgroupID", "meetID") values ($1, $2, $3, $4, $5, $6, $7, $8)',
+														[req.body.routineType, req.body.artistry, req.body.execution, req.body.difficulty, req.body.penalties, req.body.totalScore, pairgroupsID, meetNameID],
+														function(err, result) {
+															if (err) {
+																console.log('error in query inserting into scores table', err);
+															} else {
+																console.log('data inserted into scores table');
 															}
 														}
 													);
@@ -254,6 +276,17 @@ app.post('/api/scores', function(req, res) {
 																		}
 																	}
 																);
+																// insert everything into scores table
+																client.query('INSERT INTO "scores" ("routineType", "artistry", "execution", "difficulty", "penalties", "total", "pairgroupID", "meetID") values ($1, $2, $3, $4, $5, $6, $7, $8)',
+																	[req.body.routineType, req.body.artistry, req.body.execution, req.body.difficulty, req.body.penalties, req.body.totalScore, pairgroupsID, existingMeetNameID],
+																	function(err, result) {
+																		if (err) {
+																			console.log('error in query inserting into scores table', err);
+																		} else {
+																			console.log('data inserted into scores table');
+																		}
+																	}
+																);
 															}
 														}
 													);
@@ -293,6 +326,17 @@ app.post('/api/scores', function(req, res) {
 												}
 											}
 										);
+										// insert everything into scores table
+										client.query('INSERT INTO "scores" ("routineType", "artistry", "execution", "difficulty", "penalties", "total", "pairgroupID", "meetID") values ($1, $2, $3, $4, $5, $6, $7, $8)',
+											[req.body.routineType, req.body.artistry, req.body.execution, req.body.difficulty, req.body.penalties, req.body.totalScore, pairgroupsID, existingMeetNameID],
+											function(err, result) {
+												if (err) {
+													console.log('error in query inserting into scores table', err);
+												} else {
+													console.log('data inserted into scores table');
+												}
+											}
+										);
 									}
 								}
 							}
@@ -302,7 +346,6 @@ app.post('/api/scores', function(req, res) {
 			}
 		);
 
-		// TODO: insert routine type, artistry, execution, difficulty, penalties, total score into scores table
 
 		// TODO: rewrite this query to select all score info from scores table inner join pairgroups table on column = column where pairgroupsid = pairgroups primary key
 			// + select meet info from meets table inner join scores table on column = column where meetid = meet primary key

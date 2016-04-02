@@ -60,25 +60,25 @@
 
 	<!-- artistry score -->
 	<label>Artistry</label>
-	<input type="number" ng-model="artistryScore" ng-init="artistryScore=0" ng-change = "updateScore()">
+	<input type="number" step="any" ng-model="artistryScore" ng-init="artistryScore=0" ng-change = "updateScore()">
 
 	<!-- execution score -->
 	<label>Execution</label>
-	<input type="number" ng-model="executionScore" ng-init="executionScore=0" ng-change = "updateScore()">
+	<input type="number" step="any" ng-model="executionScore" ng-init="executionScore=0" ng-change = "updateScore()">
 
 	<!-- difficlty score -->
 	<label>Difficulty</label>
-	<input type="number" ng-model="difficultyScore" ng-init="difficultyScore=0" ng-change = "updateScore()">
+	<input type="number" step="any" ng-model="difficultyScore" ng-init="difficultyScore=0" ng-change = "updateScore()">
 
 	<!-- penalties (enter a positive number)-->
 	<label>Penalties (enter positive number)</label>
-	<input type="number" ng-model="penalties" ng-init="penalties=0" ng-change = "updateScore()">
+	<input type="number" step="any" ng-model="penalties" ng-init="penalties=0" ng-change = "updateScore()">
 
 	<br>
 
 	<!-- total score -->
 	<label>Total Routine Score</label>
-	<input type="number" ng-model="totalScore" ng-init="totalScore=0" ng-blur="validateScore()">
+	<input type="number" step="any" ng-model="totalScore" ng-init="totalScore=0" ng-blur="validateScore()">
 </fieldset>
 
 <button type="submit">Add score to the database</button>
