@@ -13,4 +13,17 @@ angular.module('acroScore.viewScores', [
 	$scope.thirdAthlete = $scope.groupJustPosted.data[0].athlete3;
 	$scope.fourthAthlete = $scope.groupJustPosted.data[0].athlete4;
 
+	$scope.meetTotal = function(meetName) {
+		var meetTotalScore = 0;
+		for (var i = 0; i < $scope.groupJustPosted.data.length; i++) {
+			// if the meet names match
+			if ($scope.groupJustPosted.data[i].meetName === meetName) {
+				// add scores together
+				var scoreToBeAdded = Number($scope.groupJustPosted.data[i].total);
+				meetTotalScore += scoreToBeAdded;
+			}
+		}
+		return meetTotalScore;
+	}
+
 }])
