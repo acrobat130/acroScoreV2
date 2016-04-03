@@ -1,14 +1,14 @@
 <div>
 	<h4>
 		<span>Athletes:</span>
-		<span>{{groupJustPosted.data[0].athlete1}}</span>
-		<span>, {{groupJustPosted.data[0].athlete2}}</span>
-		<span ng-show="thirdAthlete">, {{groupJustPosted.data[0].athlete3}}</span>
-		<span ng-show="fourthAthlete">, {{groupJustPosted.data[0].athlete4}}</span>
+		<span>{{groupQueried.data[0].athlete1}}</span>
+		<span>, {{groupQueried.data[0].athlete2}}</span>
+		<span ng-show="thirdAthlete">, {{groupQueried.data[0].athlete3}}</span>
+		<span ng-show="fourthAthlete">, {{groupQueried.data[0].athlete4}}</span>
 	</h4>
 	<h4>
 		<span>Team:</span>
-		<span>{{groupJustPosted.data[0].teamName}}</span>
+		<span>{{groupQueried.data[0].teamName}}</span>
 	</h4>
 	<table>
 		<tr>
@@ -23,7 +23,7 @@
 			<th>Score</th>
 			<th>Meet Total</th>
 		</tr>
-		<tr ng-repeat="score in groupJustPosted.data | orderBy:['-meetYear', meetName]">
+		<tr ng-repeat="score in groupQueried.data | orderBy:['-meetYear', meetName]">
 			<td>{{score.meetName}}</td>
 			<td>{{score.meetYear}}</td>
 			<td>level/age group</td>
