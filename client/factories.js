@@ -4,7 +4,7 @@ angular.module('acroScore.factories', [])
 	// return console.log("inside the getPostFactory")
 	var url = '/api/scores';
 	var groupJustPosted = {};
-	var lastGetRequest = {};
+	var lastScoresRequested = {};
 
 	var consoleSomething = function(scoreInfoFromUserInput) {
 		console.log("inside getPostFactory");
@@ -29,14 +29,14 @@ angular.module('acroScore.factories', [])
 
 	var getScores = function(data) {
 		return $http({
-			method: 'GET',
-			url: '/api/scores',
+			method: 'POST',
+			url: '/api/getscores',
 			data: data
 		})
 		.then(function(response) {
 			console.log("successfully fetched data");
-			console.log("response returned from GET", response);
-			lastGetRequest.data = response.data;
+			console.log("response returned from getScores request", response);
+			lastScoresRequested.data = response.data;
 			return response.data;
 		})
 	}

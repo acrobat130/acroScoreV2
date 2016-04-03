@@ -40,15 +40,15 @@ angular.module('acroScore.viewScores', [
 	};
 
 	$scope.searchDatabase = function() {
-		$scope.athleteOrMeetToSearch = "";
-		$scope.dataForGetRequest = {
+		$scope.dataForRequest = {
 			searchType: $scope.searchDatabaseFor,
 			dataToSearchFor: $scope.athleteOrMeetToSearch
 		};
 		alert('retrieving scores from database');
-		getPostFactory.getScores($scope.dataForGetRequest).then(function(dataFromFactory) {
+		getPostFactory.getScores($scope.dataForRequest).then(function(dataFromFactory) {
 			$scope.groupQueried = dataFromFactory;
 		})
+		$scope.athleteOrMeetToSearch = "";
 	};
 
 }])

@@ -426,4 +426,22 @@ app.post('/api/scores', function(req, res) {
 
 	})
 	// res.send("done")
-})
+});
+
+app.post('/api/getscores', function(req, res) {
+	// create array to hold results
+	console.log('req.body===============', req.body)
+	var results = [];
+});
+
+
+
+
+
+
+
+
+
+
+
+
