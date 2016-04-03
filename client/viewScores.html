@@ -13,6 +13,7 @@
 	<table>
 		<tr>
 			<th>Meet</th>
+			<th>Year</th>
 			<th>Level/Age Group</th>
 			<th>Routine</th>
 			<th>Execution</th>
@@ -22,8 +23,9 @@
 			<th>Score</th>
 			<th>Meet Total</th>
 		</tr>
-		<tr ng-repeat="score in groupJustPosted.data">
+		<tr ng-repeat="score in groupJustPosted.data | orderBy:['-meetYear', meetName]">
 			<td>{{score.meetName}}</td>
+			<td>{{score.meetYear}}</td>
 			<td>level/age group</td>
 			<td>{{score.routineType}}</td>
 			<td>{{score.execution}}</td>
@@ -34,14 +36,7 @@
 			<td>{{meetTotal(score.meetName)}}</td>
 		</tr>
 	</table>
-<!-- 	<div ng-repeat="score in groupJustPosted.data">
-		meet, level/age group, score info
- -->
-		<!-- <h4>{{score.meetName}}</h4>
-		<p>{{score.athlete1}}, {{score.athlete2}}, {{score.athlete3}}, {{score.athlete4}}</p>
-		<h4>Team:</h4>
-		<p>{{score.teamName}}</p>
-		<hr> -->
+
 	</div>
 
 
