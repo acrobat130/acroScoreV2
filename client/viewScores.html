@@ -1,4 +1,13 @@
 <div>
+	<form id="searchDatabaseForm" ng-submit="searchDatabase()">
+		<fieldset>
+			<select ng-model="searchDatabaseFor">
+				<option value="" selected>Search for</option>
+				<option value="athletes">Athletes</option>
+				<option value="meets">Meets</option>
+			</select>
+		</fieldset>
+	</form>
 	<h4>
 		<span>Athletes:</span>
 		<span>{{groupQueried.data[0].athlete1}}</span><span>, {{groupQueried.data[0].athlete2}}</span><span ng-show="thirdAthlete">, {{groupQueried.data[0].athlete3}}</span><span ng-show="fourthAthlete">, {{groupQueried.data[0].athlete4}}</span>
