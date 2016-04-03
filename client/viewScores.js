@@ -10,8 +10,22 @@ angular.module('acroScore.viewScores', [
 	$scope.groupQueried = getPostFactory.groupJustPosted;
 	console.log("$scope.groupQueried", $scope.groupQueried);
 
-	$scope.thirdAthlete = $scope.groupQueried.data[0].athlete3;
-	$scope.fourthAthlete = $scope.groupQueried.data[0].athlete4;
+	// test to see if the groupQueried object is empty or not
+	$scope.groupQueryLoaded = function() {
+		console.log("Object.keys($scope.groupQueried).length", Object.keys($scope.groupQueried).length)
+		if (Object.keys($scope.groupQueried).length > 0) {
+			console.log("true")
+			return true;
+		} else {
+			console.log("false")
+			return false;
+		}
+	}
+	// set values of athlete names after they have loaded
+	if ($scope.groupQueryLoaded()) {
+		$scope.thirdAthlete = $scope.groupQueried.data[0].athlete3;
+		$scope.fourthAthlete = $scope.groupQueried.data[0].athlete4;
+	}
 
 	$scope.meetTotal = function(meetName) {
 		var meetTotalScore = 0;

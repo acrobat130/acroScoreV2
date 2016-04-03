@@ -8,47 +8,41 @@
 			</select>
 		</fieldset>
 	</form>
-	<h4>
-		<span>Athletes:</span>
-		<span>{{groupQueried.data[0].athlete1}}</span><span>, {{groupQueried.data[0].athlete2}}</span><span ng-show="thirdAthlete">, {{groupQueried.data[0].athlete3}}</span><span ng-show="fourthAthlete">, {{groupQueried.data[0].athlete4}}</span>
-	</h4>
-	<h4>
-		<span>Team:</span>
-		<span>{{groupQueried.data[0].teamName}}</span>
-	</h4>
-	<table>
-		<tr>
-			<th>Meet</th>
-			<th>Year</th>
-			<th>Level/Age Group</th>
-			<th>Routine</th>
-			<th>Execution</th>
-			<th>Artistry</th>
-			<th>Difficulty</th>
-			<th>Penalties</th>
-			<th>Score</th>
-			<th>Meet Total</th>
-		</tr>
-		<tr ng-repeat="score in groupQueried.data | orderBy:['-meetYear', meetName]">
-			<td>{{score.meetName}}</td>
-			<td>{{score.meetYear}}</td>
-			<td>level/age group</td>
-			<td>{{score.routineType}}</td>
-			<td>{{score.execution}}</td>
-			<td>{{score.artistry}}</td>
-			<td>{{score.difficulty}}</td>
-			<td>{{score.penalties}}</td>
-			<td>{{score.total}}</td>
-			<td>{{meetTotal(score.meetName)}}</td>
-		</tr>
-	</table>
-
+	<div ng-show="groupQueryLoaded()">
+		<h4>
+			<span>Athletes:</span>
+			<span>{{groupQueried.data[0].athlete1}}</span><span>, {{groupQueried.data[0].athlete2}}</span><span ng-show="thirdAthlete">, {{groupQueried.data[0].athlete3}}</span><span ng-show="fourthAthlete">, {{groupQueried.data[0].athlete4}}</span>
+		</h4>
+		<h4>
+			<span>Team:</span>
+			<span>{{groupQueried.data[0].teamName}}</span>
+		</h4>
+		<table>
+			<tr>
+				<th>Meet</th>
+				<th>Year</th>
+				<th>Level/Age Group</th>
+				<th>Routine</th>
+				<th>Execution</th>
+				<th>Artistry</th>
+				<th>Difficulty</th>
+				<th>Penalties</th>
+				<th>Score</th>
+				<th>Meet Total</th>
+			</tr>
+			<tr ng-repeat="score in groupQueried.data | orderBy:['-meetYear', meetName]">
+				<td>{{score.meetName}}</td>
+				<td>{{score.meetYear}}</td>
+				<td>level/age group</td>
+				<td>{{score.routineType}}</td>
+				<td>{{score.execution}}</td>
+				<td>{{score.artistry}}</td>
+				<td>{{score.difficulty}}</td>
+				<td>{{score.penalties}}</td>
+				<td>{{score.total}}</td>
+				<td>{{meetTotal(score.meetName)}}</td>
+			</tr>
+		</table>
 	</div>
-
-
-
-
-
-
 
 </div>
