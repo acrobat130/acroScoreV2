@@ -14,10 +14,8 @@ angular.module('acroScore.viewScores', [
 	$scope.groupQueryLoaded = function() {
 		console.log("Object.keys($scope.groupQueried).length", Object.keys($scope.groupQueried).length)
 		if (Object.keys($scope.groupQueried).length > 0) {
-			console.log("true")
 			return true;
 		} else {
-			console.log("false")
 			return false;
 		}
 	}
