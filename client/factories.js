@@ -4,11 +4,13 @@ angular.module('acroScore.factories', [])
 	// return console.log("inside the getPostFactory")
 	var url = '/api/scores';
 	var groupJustPosted = {};
+	var lastGetRequest = {};
 
 	var consoleSomething = function(scoreInfoFromUserInput) {
 		console.log("inside getPostFactory");
 		console.log("testing scoreInfoFromUserInput variable", scoreInfoFromUserInput)
-	}
+	};
+
 	var postScore = function(data) {
 		console.log("data in postScore", data)
 		return $http({
@@ -23,11 +25,26 @@ angular.module('acroScore.factories', [])
 			groupJustPosted.data = response.data;
 			return response.data;
 		})
+	};
+
+	var getScores = function(data) {
+		return $http({
+			method: 'GET',
+			url: '/api/scores',
+			data: data
+		})
+		.then(function(response) {
+			console.log("successfully fetched data");
+			console.log("response returned from GET", response);
+			lastGetRequest.data = response.data;
+			return response.data;
+		})
 	}
 
 	return {
 		test: consoleSomething,
 		postScore: postScore,
-		groupJustPosted: groupJustPosted
+		groupJustPosted: groupJustPosted,
+		getScores: getScores
 	};
 }])

@@ -1,14 +1,25 @@
 <div>
 	<form id="searchDatabaseForm" ng-submit="searchDatabase()">
+
 		<fieldset>
+			<!-- search field info -->
+			<h4>Search for Scores</h4>
+			<!-- search by athlete or meet -->
 			<select ng-model="searchDatabaseFor">
-				<option value="" selected>Search for</option>
+				<option value="" selected>Search by</option>
 				<option value="athletes">Athletes</option>
 				<option value="meets">Meets</option>
 			</select>
+			<!-- athletes or meet to search for -->
+			<input type="text" ng-model="athleteOrMeetToSearch" placeholder="athlete(s) or meet name"></input>
 		</fieldset>
+		<!-- TODO: add submit button -->
+
 	</form>
+
+	<!-- score listings -->
 	<div ng-show="groupQueryLoaded()">
+		<h3>view scores from the database</h3>
 		<h4>
 			<span>Athletes:</span>
 			<span>{{groupQueried.data[0].athlete1}}</span><span>, {{groupQueried.data[0].athlete2}}</span><span ng-show="thirdAthlete">, {{groupQueried.data[0].athlete3}}</span><span ng-show="fourthAthlete">, {{groupQueried.data[0].athlete4}}</span>

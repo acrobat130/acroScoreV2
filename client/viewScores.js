@@ -18,7 +18,8 @@ angular.module('acroScore.viewScores', [
 		} else {
 			return false;
 		}
-	}
+	};
+
 	// set values of athlete names after they have loaded
 	if ($scope.groupQueryLoaded()) {
 		$scope.thirdAthlete = $scope.groupQueried.data[0].athlete3;
@@ -36,6 +37,18 @@ angular.module('acroScore.viewScores', [
 			}
 		}
 		return meetTotalScore;
-	}
+	};
+
+	$scope.searchDatabase = function() {
+		$scope.athleteOrMeetToSearch = "";
+		$scope.dataForGetRequest = {
+			searchType: $scope.searchDatabaseFor,
+			dataToSearchFor: $scope.athleteOrMeetToSearch
+		};
+		alert('retrieving scores from database');
+		getPostFactory.getScores($scope.dataForGetRequest).then(function(dataFromFactory) {
+			$scope.groupQueried = dataFromFactory;
+		})
+	};
 
 }])
