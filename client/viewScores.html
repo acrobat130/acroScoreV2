@@ -41,6 +41,16 @@
 
 	<!-- live-updating search results for athletes -->
 	<div ng-if="searchDatabaseFor==='meets'">
+		<table>
+			<tr>
+				<th>Meet Name</th>
+				<th>Year</th>
+			</tr>
+			<tr ng-repeat="meet in meetList | filter: athleteOrMeetToSearch">
+				<td>{{meet.meetName}}</td>
+				<td>{{meet.meetYear}}</td>
+			</tr>
+		</table>
 	</div>
 
 	<!-- score listings -->
