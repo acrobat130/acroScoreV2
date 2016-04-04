@@ -10,7 +10,7 @@
 			<select ng-model="searchDatabaseFor">
 				<option value="" selected>Search by</option>
 				<option value="athletes">Athletes</option>
-				<option value="meets">Meets</option>
+				<option value="meets" ng-model="meetsOption">Meets</option>
 			</select>
 			<!-- athletes or meet to search for -->
 			<input type="text" ng-model="athleteOrMeetToSearch" placeholder="athlete(s) or meet name"></input>
@@ -18,6 +18,30 @@
 		<!-- TODO: add submit button -->
 
 	</form>
+
+	<!-- live-updating search results for athletes -->
+	<div ng-if="searchDatabaseFor==='athletes'">
+		<table>
+			<tr>
+				<th>Athlete 1</th>
+				<th>Athlete 2</th>
+				<th>Athlete 3</th>
+				<th>Athlete 4</th>
+				<th>Team Name</th>
+			</tr>
+			<tr ng-repeat="group in athleteList | filter: athleteOrMeetToSearch">
+				<td>{{group.athlete1}}</td>
+				<td>{{group.athlete2}}</td>
+				<td>{{group.athlete3}}</td>
+				<td>{{group.athlete4}}</td>
+				<td>{{group.teamName}}</td>
+			</tr>
+		</table>
+	</div>
+
+	<!-- live-updating search results for athletes -->
+	<div ng-if="searchDatabaseFor==='meets'">
+	</div>
 
 	<!-- score listings -->
 	<div ng-show="groupQueryLoaded()">

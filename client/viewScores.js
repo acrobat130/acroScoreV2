@@ -19,7 +19,7 @@ angular.module('acroScore.viewScores', [
 
 	// test to see if the groupQueried object is empty or not
 	$scope.groupQueryLoaded = function() {
-		console.log("Object.keys($scope.groupQueried).length", Object.keys($scope.groupQueried).length)
+		// console.log("Object.keys($scope.groupQueried).length", Object.keys($scope.groupQueried).length)
 		if (Object.keys($scope.groupQueried).length > 0) {
 			return true;
 		} else {
