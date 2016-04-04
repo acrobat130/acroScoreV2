@@ -39,16 +39,16 @@ angular.module('acroScore.viewScores', [
 		return meetTotalScore;
 	};
 
-	$scope.searchDatabase = function() {
-		$scope.dataForRequest = {
-			searchType: $scope.searchDatabaseFor,
-			dataToSearchFor: $scope.athleteOrMeetToSearch
-		};
-		alert('retrieving scores from database');
-		getPostFactory.getScores($scope.dataForRequest).then(function(dataFromFactory) {
-			$scope.groupQueried = dataFromFactory;
-		})
-		$scope.athleteOrMeetToSearch = "";
-	};
+	// $scope.searchDatabase = function() {
+	// 	$scope.dataForRequest = {
+	// 		searchType: $scope.searchDatabaseFor,
+	// 		dataToSearchFor: $scope.athleteOrMeetToSearch
+	// 	};
+	// 	alert('retrieving scores from database');
+	// 	getPostFactory.getScores($scope.dataForRequest).then(function(dataFromFactory) {
+	// 		$scope.groupQueried = dataFromFactory;
+	// 	})
+	// 	$scope.athleteOrMeetToSearch = "";
+	// };
 
 }])

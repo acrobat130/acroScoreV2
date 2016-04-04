@@ -2,6 +2,7 @@
 angular.module('acroScore', [
 	// add dependencies here
 	'ui.router',
+	'acroScore.factories',
 	'acroScore.addScore',
 	'acroScore.viewScores'
 	])
@@ -28,4 +29,13 @@ angular.module('acroScore', [
 				templateUrl: 'viewScores.html',
 				controller: 'ViewScoresController'
 			})
-	}])
+	}
+])
+
+.controller('NavController', ['$scope', 'getPostFactory', function($scope, getPostFactory) {
+	console.log("inside NavController")
+
+	$scope.getAthletesAndMeets = function() {
+		getPostFactory.fetchAthletesAndMeets();
+	}
+}])

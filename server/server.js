@@ -428,12 +428,74 @@ app.post('/api/scores', function(req, res) {
 	// res.send("done")
 });
 
-app.post('/api/getscores', function(req, res) {
-	// create array to hold results
-	console.log('req.body===============', req.body)
-	var results = [];
-});
+// app.post('/api/getscores', function(req, res) {
+// 	// create array to hold results
+// 	console.log('req.body===============', req.body)
+// 	var results = [];
 
+// 	// if search type is athletes
+// 		// 'SELECT * FROM "scores" INNER JOIN pairgroups ON scores.pairgroup_id = pairgroups.pairgroups_id INNER JOIN "meetNames" ON scores."meetID" = "meetNames"."meetID" WHERE ...?'
+
+// 	// else if search type is meet
+// 		// 'SELECT * FROM "meetNames" WHERE'
+// 		// 'SELECT * FROM "scores" INNER JOIN pairgroups ON scores.pairgroup_id = pairgroups.pairgroups_id INNER JOIN "meetNames" ON scores."meetID" = "meetNames"."meetID" WHERE ...?'
+
+
+// 	// send back all scores from selected pairgroup
+// 	// var resultsQuery = client.query('SELECT * FROM "scores" INNER JOIN pairgroups ON scores.pairgroup_id = pairgroups.pairgroups_id INNER JOIN "meetNames" ON scores."meetID" = "meetNames"."meetID" WHERE scores.pairgroup_id = $1',
+// 	// 	[pairgroupsID]);
+
+// 	// resultsQuery.on('row', function(row) {
+// 	// 	results.push(row);
+// 	// });
+
+// 	// resultsQuery.on('end', function() {
+// 	// 	done();
+// 	// 	return res.json(results);
+// 	// });
+// });
+
+app.get('/api/getathletesmeets', function(req, res) {
+	// create array to hold results
+	var results = {};
+	results.meets = [];
+	results.athletes = [];
+
+	// connect to database
+	pg.connect(connectionString, function(err, client, done) {
+		// handle connection errors
+		if (err) {
+			console.log('error connecting to database when posting score', err);
+			return res.status(500).json({
+				success: false,
+				data: err
+			});
+		};
+
+		// select all meets
+		var meetsQuery = client.query('SELECT * FROM "meetNames"');
+
+		// select all athletes
+		var athletesQuery = client.query('SELECT * FROM "pairgroups"');
+
+		meetsQuery.on('row', function(row) {
+			// store meets
+			results.meets.push(row);
+		});
+
+		meetsQuery.on('end', function() {
+			// store athletes
+			athletesQuery.on('row', function(row) {
+				results.athletes.push(row);
+			});
+
+			athletesQuery.on('end', function() {
+				done();
+				return res.json(results);
+			});
+		});
+	});
+});
 
 
 

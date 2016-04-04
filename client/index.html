@@ -16,11 +16,11 @@
         </center>
     </div>
     <!-- buttons/future navbar -->
-    <div>
+    <div ng-controller="NavController">
         <ul>
             <button ui-sref="home">home</button>
             <button ui-sref="addScore">add score</button>
-            <button ui-sref="viewScores">view scores</button>
+            <button ng-click="getAthletesAndMeets()" ui-sref="viewScores" >view scores</button>
         </ul>
     </div>
 
