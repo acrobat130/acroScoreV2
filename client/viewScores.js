@@ -8,7 +8,14 @@ angular.module('acroScore.viewScores', [
 	console.log("inside ViewScoresController");
 
 	$scope.groupQueried = getPostFactory.groupJustPosted;
-	console.log("$scope.groupQueried", $scope.groupQueried);
+	$scope.athleteList;
+	$scope.meetList;
+
+	//load athletelist and meetlist
+	getPostFactory.fetchAthletesAndMeets().then(function(dataFromFactory) {
+		$scope.athleteList = dataFromFactory.athletes;
+		$scope.meetList = dataFromFactory.meets;
+	})
 
 	// test to see if the groupQueried object is empty or not
 	$scope.groupQueryLoaded = function() {

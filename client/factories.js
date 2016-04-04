@@ -52,6 +52,8 @@ angular.module('acroScore.factories', [])
 			console.log('response returned from fetchAthletesAndMeets GET request', response);
 			athleteList.data = response.data;
 			meetList.data = response.data;
+			console.log("athleteList", athleteList);
+			console.log("meetList", meetList)
 			return response.data;
 		})
 	}
@@ -61,6 +63,8 @@ angular.module('acroScore.factories', [])
 		postScore: postScore,
 		groupJustPosted: groupJustPosted,
 		// getScores: getScores,
-		fetchAthletesAndMeets: fetchAthletesAndMeets
+		fetchAthletesAndMeets: fetchAthletesAndMeets,
+		athleteList: athleteList,
+		meetList: meetList
 	};
 }])
