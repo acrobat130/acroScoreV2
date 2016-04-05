@@ -465,7 +465,7 @@ app.get('/api/getathletesmeets', function(req, res) {
 	pg.connect(connectionString, function(err, client, done) {
 		// handle connection errors
 		if (err) {
-			console.log('error connecting to database when posting score', err);
+			console.log('error connecting to database when getting athlete and meet lists', err);
 			return res.status(500).json({
 				success: false,
 				data: err
@@ -494,6 +494,49 @@ app.get('/api/getathletesmeets', function(req, res) {
 				return res.json(results);
 			});
 		});
+	});
+});
+
+app.post('/api/getscoresfromathletes', function(req, res) {
+	// create array to hold results
+	var results = [];
+
+	// connect to database
+	pg.connect(connectionString, function(err, client, done) {
+		// handle connection errors
+		if (err) {
+			console.log('error connecting to database when getting scores from athletes', err);
+			return res.status(500).json({
+				success: false,
+				data: err
+			});
+		}
+
+		// find pairgroupsID based on input
+		client.query('SELECT "pairgroups_id" FROM "pairgroups" WHERE "athlete1" = $1 OR "athlete2" = $1 OR "athlete3" = $1 OR "athlete4" = $1 AND "athlete1" = $2 OR "athlete2" = $2 OR "athlete3" = $2 OR "athlete4" = $2 AND "athlete1" = $3 OR "athlete3" = $3 OR "athlete3" = $3 OR "athlete4" = $3 AND "athlete1" = $4 OR "athlete4" = $4 OR "athlete3" = $4 OR "athlete4" = $4',
+			[req.body.athlete1, req.body.athlete2, req.body.athlete3, req.body.athlete4],
+			function(err, result) {
+				if (err) {
+					console.log('error in query getting pairgroups_id', err);
+				} else {
+					// store pairgroupsID from database
+					var pairgroupsID = result.rows[0].pairgroups_id;
+
+					// select scores where the athletes match
+					var queryScoresFromAthletes = client.query('SELECT * FROM "scores" INNER JOIN pairgroups ON scores.pairgroup_id = pairgroups.pairgroups_id INNER JOIN "meetNames" ON scores."meetID" = "meetNames"."meetID" WHERE scores.pairgroup_id = $1',
+						[pairgroupsID]);
+
+					queryScoresFromAthletes.on('row', function(row) {
+						results.push(row);
+					});
+
+					queryScoresFromAthletes.on('end', function() {
+						done();
+						return res.json(results);
+					});
+				}
+			}
+		);
 	});
 });
 

@@ -29,19 +29,20 @@ angular.module('acroScore.factories', [])
 		})
 	};
 
-	// var getScores = function(data) {
-	// 	return $http({
-	// 		method: 'POST',
-	// 		url: '/api/getscores',
-	// 		data: data
-	// 	})
-	// 	.then(function(response) {
-	// 		console.log("successfully fetched data");
-	// 		console.log("response returned from getScores request", response);
-	// 		lastScoresRequested.data = response.data;
-	// 		return response.data;
-	// 	})
-	// }
+	var getScoresFromAthletes = function(data) {
+		return $http({
+			method: 'POST',
+			url: '/api/getscoresfromathletes',
+			data: data
+		})
+		.then(function(response) {
+			console.log("successfully fetched data");
+			console.log("response returned from getScores request", response);
+			groupJustPosted.data = response.data;
+			return response.data;
+		})
+	}
+
 	var fetchAthletesAndMeets = function() {
 		return $http({
 			method: 'GET',
@@ -52,8 +53,6 @@ angular.module('acroScore.factories', [])
 			console.log('response returned from fetchAthletesAndMeets GET request', response);
 			athleteList.data = response.data;
 			meetList.data = response.data;
-			console.log("athleteList", athleteList);
-			console.log("meetList", meetList)
 			return response.data;
 		})
 	}
@@ -62,7 +61,7 @@ angular.module('acroScore.factories', [])
 		test: consoleSomething,
 		postScore: postScore,
 		groupJustPosted: groupJustPosted,
-		// getScores: getScores,
+		getScoresFromAthletes: getScoresFromAthletes,
 		fetchAthletesAndMeets: fetchAthletesAndMeets,
 		athleteList: athleteList,
 		meetList: meetList

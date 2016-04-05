@@ -29,7 +29,7 @@
 				<th>Athlete 4</th>
 				<th>Team Name</th>
 			</tr>
-			<tr ng-repeat="group in athleteList | filter: athleteOrMeetToSearch">
+			<tr ng-repeat="group in athleteList | filter: athleteOrMeetToSearch" ng-click="$parent.searchDatabaseAthletes(group.athlete1, group.athlete2, group.athlete3, group.athlete4, group.teamName)">
 				<td>{{group.athlete1}}</td>
 				<td>{{group.athlete2}}</td>
 				<td>{{group.athlete3}}</td>
@@ -58,11 +58,11 @@
 		<h3>view scores from the database</h3>
 		<h4>
 			<span>Athletes:</span>
-			<span>{{groupQueried.data[0].athlete1}}</span><span>, {{groupQueried.data[0].athlete2}}</span><span ng-show="thirdAthlete">, {{groupQueried.data[0].athlete3}}</span><span ng-show="fourthAthlete">, {{groupQueried.data[0].athlete4}}</span>
+			<span>{{scoresQueried.data[0].athlete1}}</span><span>, {{scoresQueried.data[0].athlete2}}</span><span ng-show="thirdAthlete">, {{scoresQueried.data[0].athlete3}}</span><span ng-show="fourthAthlete">, {{scoresQueried.data[0].athlete4}}</span>
 		</h4>
 		<h4>
 			<span>Team:</span>
-			<span>{{groupQueried.data[0].teamName}}</span>
+			<span>{{scoresQueried.data[0].teamName}}</span>
 		</h4>
 		<table>
 			<tr>
@@ -77,7 +77,7 @@
 				<th>Score</th>
 				<th>Meet Total</th>
 			</tr>
-			<tr ng-repeat="score in groupQueried.data | orderBy:['-meetYear', meetName]">
+			<tr ng-repeat="score in scoresQueried.data | orderBy:['-meetYear', meetName]">
 				<td>{{score.meetName}}</td>
 				<td>{{score.meetYear}}</td>
 				<td>level/age group</td>

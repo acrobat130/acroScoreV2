@@ -7,20 +7,20 @@ angular.module('acroScore.viewScores', [
 .controller('ViewScoresController', ['$scope', 'getPostFactory', '$location', function($scope, getPostFactory, $location) {
 	console.log("inside ViewScoresController");
 
-	$scope.groupQueried = getPostFactory.groupJustPosted;
+	$scope.scoresQueried = getPostFactory.groupJustPosted;
 	$scope.athleteList;
 	$scope.meetList;
 
-	//load athletelist and meetlist
+	//load athletelist and meetlist for search functionality
 	getPostFactory.fetchAthletesAndMeets().then(function(dataFromFactory) {
 		$scope.athleteList = dataFromFactory.athletes;
 		$scope.meetList = dataFromFactory.meets;
 	})
 
-	// test to see if the groupQueried object is empty or not
+	// test to see if the scoresQueried object is empty or not
 	$scope.groupQueryLoaded = function() {
-		// console.log("Object.keys($scope.groupQueried).length", Object.keys($scope.groupQueried).length)
-		if (Object.keys($scope.groupQueried).length > 0) {
+		// console.log("Object.keys($scope.scoresQueried).length", Object.keys($scope.scoresQueried).length)
+		if (Object.keys($scope.scoresQueried).length > 0) {
 			return true;
 		} else {
 			return false;
@@ -28,34 +28,42 @@ angular.module('acroScore.viewScores', [
 	};
 
 	// set values of athlete names after they have loaded
-	if ($scope.groupQueryLoaded()) {
-		$scope.thirdAthlete = $scope.groupQueried.data[0].athlete3;
-		$scope.fourthAthlete = $scope.groupQueried.data[0].athlete4;
+	$scope.setExtraAthleteNames = function() {
+		if ($scope.groupQueryLoaded()) {
+			$scope.thirdAthlete = $scope.scoresQueried.data[0].athlete3;
+			$scope.fourthAthlete = $scope.scoresQueried.data[0].athlete4;
+		}
 	}
+	$scope.setExtraAthleteNames();
 
 	$scope.meetTotal = function(meetName) {
 		var meetTotalScore = 0;
-		for (var i = 0; i < $scope.groupQueried.data.length; i++) {
+		for (var i = 0; i < $scope.scoresQueried.data.length; i++) {
 			// if the meet names match
-			if ($scope.groupQueried.data[i].meetName === meetName) {
+			if ($scope.scoresQueried.data[i].meetName === meetName) {
 				// add scores together
-				var scoreToBeAdded = Number($scope.groupQueried.data[i].total);
+				var scoreToBeAdded = Number($scope.scoresQueried.data[i].total);
 				meetTotalScore += scoreToBeAdded;
 			}
 		}
 		return meetTotalScore;
 	};
 
-	// $scope.searchDatabase = function() {
-	// 	$scope.dataForRequest = {
-	// 		searchType: $scope.searchDatabaseFor,
-	// 		dataToSearchFor: $scope.athleteOrMeetToSearch
-	// 	};
-	// 	alert('retrieving scores from database');
-	// 	getPostFactory.getScores($scope.dataForRequest).then(function(dataFromFactory) {
-	// 		$scope.groupQueried = dataFromFactory;
-	// 	})
-	// 	$scope.athleteOrMeetToSearch = "";
-	// };
+	$scope.searchDatabaseAthletes = function(athlete1, athlete2, athlete3, athlete4, teamName) {
+		$scope.dataForRequest = {
+			athlete1: athlete1,
+			athlete2: athlete2,
+			athlete3: athlete3,
+			athlete4: athlete4,
+			teamName: teamName
+		};
+		alert('retrieving scores from database');
+		getPostFactory.getScoresFromAthletes($scope.dataForRequest).then(function(dataFromFactory) {
+			$scope.setExtraAthleteNames();
+			// $location.path('/viewScores');
+			// $scope.scoresQueried = dataFromFactory;
+		})
+		$scope.athleteOrMeetToSearch = "";
+	};
 
 }])
