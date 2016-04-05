@@ -10,31 +10,38 @@ angular.module('acroScore.viewScores', [
 	$scope.scoresQueried = getPostFactory.groupJustPosted;
 	$scope.athleteList;
 	$scope.meetList;
+	$scope.showMeetsOrAthletes = 'athletes'; // change to meets to change to meet display view
 
 	//load athletelist and meetlist for search functionality
 	getPostFactory.fetchAthletesAndMeets().then(function(dataFromFactory) {
+		$scope.setExtraAthleteNames();
 		$scope.athleteList = dataFromFactory.athletes;
 		$scope.meetList = dataFromFactory.meets;
 	})
 
-	// test to see if the scoresQueried object is empty or not
-	$scope.groupQueryLoaded = function() {
+	// test to see if the scoresQueried object is empty or not, which determines whether to show scores table or not
+	$scope.scoreQueryLoaded = function() {
 		// console.log("Object.keys($scope.scoresQueried).length", Object.keys($scope.scoresQueried).length)
 		if (Object.keys($scope.scoresQueried).length > 0) {
-			return true;
-		} else {
-			return false;
+			if ($scope.scoresQueried.data.length > 0) {
+				return true;
+			}
 		}
+		return false;
 	};
 
 	// set values of athlete names after they have loaded
 	$scope.setExtraAthleteNames = function() {
-		if ($scope.groupQueryLoaded()) {
-			$scope.thirdAthlete = $scope.scoresQueried.data[0].athlete3;
-			$scope.fourthAthlete = $scope.scoresQueried.data[0].athlete4;
+		// if ($scope.scoreQueryLoaded()) {
+		if (Object.keys($scope.scoresQueried).length > 0) {
+			if ($scope.scoresQueried.data.length > 0) {
+				$scope.thirdAthlete = $scope.scoresQueried.data[0].athlete3;
+				$scope.fourthAthlete = $scope.scoresQueried.data[0].athlete4;
+			}
 		}
+		// }
 	}
-	$scope.setExtraAthleteNames();
+	// $scope.setExtraAthleteNames();
 
 	$scope.meetTotal = function(meetName) {
 		var meetTotalScore = 0;
@@ -67,4 +74,22 @@ angular.module('acroScore.viewScores', [
 		$scope.searchDatabaseFor = "";
 	};
 
+	$scope.searchDatabaseMeets = function(meetName, meetYear) {
+		$scope.dataForRequest = {
+			meetName: meetName,
+			meetYear, meetYear
+		};
+		alert('retrieving scores from database');
+		getPostFactory.getScoresFromMeets($scope.dataForRequest).then(function(dataFromFactory) {
+			$scope.setExtraAthleteNames();
+			$scope.showMeetsOrAthletes = 'meets';
+		})
+		$scope.athleteOrMeetToSearch = "";
+		$scope.searchDatabaseFor = "";
+	};
+
 }])
+
+
+
+

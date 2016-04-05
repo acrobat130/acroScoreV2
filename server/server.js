@@ -540,6 +540,48 @@ app.post('/api/getscoresfromathletes', function(req, res) {
 	});
 });
 
+app.post('/api/getscoresfrommeets', function(req, res) {
+	// create array to hold results
+	var results = [];
+
+	// connect to database
+	pg.connect(connectionString, function(err, client, done) {
+		// handle connection errors
+		if (err) {
+			console.log('error connecting to database when getting scores from meets', err);
+			return res.status(500).json({
+				success: false,
+				data: err
+			});
+		}
+
+		// find meetID based on input
+		client.query('SELECT "meetID" FROM "meetNames" WHERE "meetName" = $1 AND "meetYear" = $2', [req.body.meetName, req.body.meetYear],
+			function(err, result) {
+				if (err) {
+					console.log('error in query getting meetNameID', err);
+				} else {
+					// store meetID from database
+					var meetID = result.rows[0].meetID;
+
+					// select scores where the meet id's match
+					var queryScoresFromMeets = client.query('SELECT * FROM "scores" INNER JOIN pairgroups ON scores.pairgroup_id = pairgroups.pairgroups_id INNER JOIN "meetNames" ON scores."meetID" = "meetNames"."meetID" WHERE scores."meetID" = $1',
+						[meetID]);
+
+					queryScoresFromMeets.on('row', function(row) {
+						results.push(row);
+					});
+
+					queryScoresFromMeets.on('end', function() {
+						done();
+						// console.log("results", results)
+						return res.json(results);
+					});
+				}
+			}
+		);
+	});
+});
 
 
 
