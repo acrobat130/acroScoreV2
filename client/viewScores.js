@@ -64,6 +64,7 @@ angular.module('acroScore.viewScores', [
 			// $scope.scoresQueried = dataFromFactory;
 		})
 		$scope.athleteOrMeetToSearch = "";
+		$scope.searchDatabaseFor = "";
 	};
 
 }])
