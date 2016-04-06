@@ -54,10 +54,13 @@
 	</div>
 
 	<!-- score listings -->
+	<!-- only show score listings if athletes and meets search info isn't showing -->
 	<div ng-if="searchDatabaseFor === ''">
+		<h3>view scores from the database</h3>
+		<button>List Scores</button>
+		<button>Graph Scores</button>
 		<!-- score listings, athletes view -->
 		<div ng-show="scoreQueryLoaded() && showMeetsOrAthletes==='athletes'">
-			<h3>view scores from the database</h3>
 			<h4>
 				<span>Athletes:</span>
 				<span>{{scoresQueried.data[0].athlete1}}</span><span>, {{scoresQueried.data[0].athlete2}}</span><span ng-show="thirdAthlete">, {{scoresQueried.data[0].athlete3}}</span><span ng-show="fourthAthlete">, {{scoresQueried.data[0].athlete4}}</span>
@@ -96,7 +99,6 @@
 
 		<!-- score listings, meet view -->
 		<div ng-show="scoreQueryLoaded() && showMeetsOrAthletes==='meets'">
-			<h3>view scores from the database</h3>
 			<h4>
 				<span>Meet:</span>
 				<span>{{scoresQueried.data[0].meetName}}</span>
