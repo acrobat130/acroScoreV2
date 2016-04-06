@@ -53,82 +53,85 @@
 		</table>
 	</div>
 
-	<!-- score listings, athletes view -->
-	<div ng-show="scoreQueryLoaded() && showMeetsOrAthletes==='athletes'">
-		<h3>view scores from the database</h3>
-		<h4>
-			<span>Athletes:</span>
-			<span>{{scoresQueried.data[0].athlete1}}</span><span>, {{scoresQueried.data[0].athlete2}}</span><span ng-show="thirdAthlete">, {{scoresQueried.data[0].athlete3}}</span><span ng-show="fourthAthlete">, {{scoresQueried.data[0].athlete4}}</span>
-		</h4>
-		<h4>
-			<span>Team:</span>
-			<span>{{scoresQueried.data[0].teamName}}</span>
-		</h4>
-		<table>
-			<tr>
-				<th>Meet</th>
-				<th>Year</th>
-				<th>Level/Age Group</th>
-				<th>Routine</th>
-				<th>Execution</th>
-				<th>Artistry</th>
-				<th>Difficulty</th>
-				<th>Penalties</th>
-				<th>Score</th>
-				<th>Meet Total</th>
-			</tr>
-			<tr ng-repeat="score in scoresQueried.data | orderBy:['-meetYear', meetName]">
-				<td>{{score.meetName}}</td>
-				<td>{{score.meetYear}}</td>
-				<td>level/age group</td>
-				<td>{{score.routineType}}</td>
-				<td>{{score.execution}}</td>
-				<td>{{score.artistry}}</td>
-				<td>{{score.difficulty}}</td>
-				<td>{{score.penalties}}</td>
-				<td>{{score.total}}</td>
-				<td>{{meetTotal(score.meetName)}}</td>
-			</tr>
-		</table>
-	</div>
+	<!-- score listings -->
+	<div ng-if="searchDatabaseFor === ''">
+		<!-- score listings, athletes view -->
+		<div ng-show="scoreQueryLoaded() && showMeetsOrAthletes==='athletes'">
+			<h3>view scores from the database</h3>
+			<h4>
+				<span>Athletes:</span>
+				<span>{{scoresQueried.data[0].athlete1}}</span><span>, {{scoresQueried.data[0].athlete2}}</span><span ng-show="thirdAthlete">, {{scoresQueried.data[0].athlete3}}</span><span ng-show="fourthAthlete">, {{scoresQueried.data[0].athlete4}}</span>
+			</h4>
+			<h4>
+				<span>Team:</span>
+				<span>{{scoresQueried.data[0].teamName}}</span>
+			</h4>
+			<table>
+				<tr>
+					<th>Meet</th>
+					<th>Year</th>
+					<th>Level/Age Group</th>
+					<th>Routine</th>
+					<th>Execution</th>
+					<th>Artistry</th>
+					<th>Difficulty</th>
+					<th>Penalties</th>
+					<th>Score</th>
+					<th>Meet Total</th>
+				</tr>
+				<tr ng-repeat="score in scoresQueried.data | orderBy:['-meetYear', meetName]">
+					<td>{{score.meetName}}</td>
+					<td>{{score.meetYear}}</td>
+					<td>level/age group</td>
+					<td>{{score.routineType}}</td>
+					<td>{{score.execution}}</td>
+					<td>{{score.artistry}}</td>
+					<td>{{score.difficulty}}</td>
+					<td>{{score.penalties}}</td>
+					<td>{{score.total}}</td>
+					<td>{{meetTotal(score.meetName)}}</td>
+				</tr>
+			</table>
+		</div>
 
-	<!-- score listings, meet view -->
-	<div ng-show="scoreQueryLoaded() && showMeetsOrAthletes==='meets'">
-		<h3>view scores from the database</h3>
-		<h4>
-			<span>Meet:</span>
-			<span>{{scoresQueried.data[0].meetName}}</span>
-		</h4>
-		<h4>
-			<span>Year:</span>
-			<span>{{scoresQueried.data[0].meetYear}}</span>
-		</h4>
-		<table>
-			<tr>
-				<th>Athletes</th>
-				<th>Team</th>
-				<th>Level/Age Group</th>
-				<th>Routine</th>
-				<th>Execution</th>
-				<th>Artistry</th>
-				<th>Difficulty</th>
-				<th>Penalties</th>
-				<th>Score</th>
-				<th>Meet Total</th>
-			</tr>
-			<tr ng-repeat="score in scoresQueried.data | orderBy:['total']">
-				<td>level/age group</td>
-				<td><span>{{scoresQueried.data[0].athlete1}}</span><span>, {{scoresQueried.data[0].athlete2}}</span><span ng-show="thirdAthlete">, {{scoresQueried.data[0].athlete3}}</span><span ng-show="fourthAthlete">, {{scoresQueried.data[0].athlete4}}</span></td>
-				<td>{{score.teamName}}</td>
-				<td>{{score.routineType}}</td>
-				<td>{{score.execution}}</td>
-				<td>{{score.artistry}}</td>
-				<td>{{score.difficulty}}</td>
-				<td>{{score.penalties}}</td>
-				<td>{{score.total}}</td>
-				<td>{{meetTotal(score.meetName)}}</td>
-			</tr>
-		</table>
+		<!-- score listings, meet view -->
+		<div ng-show="scoreQueryLoaded() && showMeetsOrAthletes==='meets'">
+			<h3>view scores from the database</h3>
+			<h4>
+				<span>Meet:</span>
+				<span>{{scoresQueried.data[0].meetName}}</span>
+			</h4>
+			<h4>
+				<span>Year:</span>
+				<span>{{scoresQueried.data[0].meetYear}}</span>
+			</h4>
+			<table>
+				<tr>
+					<th>Athletes</th>
+					<th>Team</th>
+					<th>Level/Age Group</th>
+					<th>Routine</th>
+					<th>Execution</th>
+					<th>Artistry</th>
+					<th>Difficulty</th>
+					<th>Penalties</th>
+					<th>Score</th>
+					<th>Meet Total</th>
+				</tr>
+				<tr ng-repeat="score in scoresQueried.data | orderBy:['total']">
+					<td>level/age group</td>
+					<td><span>{{scoresQueried.data[0].athlete1}}</span><span>, {{scoresQueried.data[0].athlete2}}</span><span ng-show="thirdAthlete">, {{scoresQueried.data[0].athlete3}}</span><span ng-show="fourthAthlete">, {{scoresQueried.data[0].athlete4}}</span></td>
+					<td>{{score.teamName}}</td>
+					<td>{{score.routineType}}</td>
+					<td>{{score.execution}}</td>
+					<td>{{score.artistry}}</td>
+					<td>{{score.difficulty}}</td>
+					<td>{{score.penalties}}</td>
+					<td>{{score.total}}</td>
+					<td>{{meetTotal(score.meetName)}}</td>
+				</tr>
+			</table>
+		</div>
 	</div>
 
 </div>
