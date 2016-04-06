@@ -14,8 +14,8 @@ angular.module('acroScore.viewScores', [
 	$scope.showMeetsOrAthletes = 'athletes'; // change to meets to change to meet display view
 	$scope.listOrGraphScores = 'list'; // changes to 'graph' when graph button is clicked
 	$scope.athleteChartData = []; // [0] = balance, [1] = dynamic, [2] = combined
-
-	$scope.chartLabels = ['Balance', 'Dynamic', 'Combined'];
+	$scope.meetsArray = [];
+	$scope.chartSeries = ['Balance', 'Dynamic', 'Combined'];
 
 	//load athletelist and meetlist for search functionality
 	getPostFactory.fetchAthletesAndMeets().then(function(dataFromFactory) {
@@ -74,6 +74,7 @@ angular.module('acroScore.viewScores', [
 			$scope.setExtraAthleteNames();
 			// $location.path('/viewScores');
 			// $scope.scoresQueried = dataFromFactory;
+			console.log("dataFromFactory", dataFromFactory)
 			$scope.formatAthleteChartData(dataFromFactory);
 		})
 		$scope.athleteOrMeetToSearch = "";
@@ -108,24 +109,56 @@ angular.module('acroScore.viewScores', [
 		var balanceArray = [];
 		var dynamicArray = [];
 		var combinedArray = [];
+		var meetTotalScoreArray = [];
+		// object for storing scores grouped by each meet
+		var meetDetailsObj = {};
 
+		// iterate through input array of scores
 		for (var i = 0; i < array.length; i++) {
+			var meetName = array[i].meetName;
+			var meetYear = array[i].meetYear;
+			var meetNameAndYear = meetName + ' ' + meetYear;
+			var routineTotal = Number(array[i].total);
+
+			// add meet to the meetDetails obj if it's not already in there
+			if (!meetDetailsObj[meetNameAndYear]) {
+				meetDetailsObj[meetNameAndYear] = new Meet(meetName, meetYear);
+			}
+			// add score to meetdetails obj
 			if (array[i].routineType === 'balance') {
-				balanceArray.push(array[i].total);
+				meetDetailsObj[meetNameAndYear].balance = routineTotal;
 			} else if (array[i].routineType === 'dynamic') {
-				dynamicArray.push(array[i].total);
+				meetDetailsObj[meetNameAndYear].dynamic = routineTotal;
 			} else if (array[i].routineType === 'combined') {
-				combinedArray.push(array[i].total);
+				meetDetailsObj[meetNameAndYear].combined = routineTotal;
 			}
-
-			if (array[i].routineType === null) {
-
-			}
-			// $scope.chartLabels.push(array[i])
 		}
 
-		$scope.athleteChartData.push(balanceArray, dynamicArray, combinedArray);
+		// iterate through meetDetails obj to calculate meetTotals
+		for (var meet in meetDetailsObj) {
+			if (meetDetailsObj.hasOwnProperty(meet)) {
+				var balance = Number(meetDetailsObj[meet].balance);
+				var dynamic = Number(meetDetailsObj[meet].dynamic);
+				var combined = Number(meetDetailsObj[meet].combined);
+				meetDetailsObj[meet].meetTotal = balance + dynamic + combined;
+			}
+		}
+
+		console.log("meetDetailsObj", meetDetailsObj)
+
+
+		$scope.athleteChartData.push(balanceArray, dynamicArray, combinedArray, meetTotalScoreArray);
 		console.log("$scope.athleteChartData", $scope.athleteChartData);
+	}
+
+	// constructor function for formatting athlete chart data
+	var Meet = function(meetName, meetYear) {
+		this.name = meetName;
+		this.year = meetYear;
+		this.balance = null;
+		this.dynamic = null;
+		this.combined = null;
+		this.meetTotal = null;
 	}
 
 }])
