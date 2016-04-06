@@ -1,6 +1,7 @@
 angular.module('acroScore.viewScores', [
 	// add dependencies here
-	'acroScore.factories'
+	'acroScore.factories',
+
 	])
 
 // if there are factory dependencies, add function it depends on as a function argument
@@ -12,6 +13,9 @@ angular.module('acroScore.viewScores', [
 	$scope.meetList;
 	$scope.showMeetsOrAthletes = 'athletes'; // change to meets to change to meet display view
 	$scope.listOrGraphScores = 'list'; // changes to 'graph' when graph button is clicked
+	$scope.athleteChartData = []; // [0] = balance, [1] = dynamic, [2] = combined
+
+	$scope.chartLabels = ['Balance', 'Dynamic', 'Combined'];
 
 	//load athletelist and meetlist for search functionality
 	getPostFactory.fetchAthletesAndMeets().then(function(dataFromFactory) {
@@ -70,6 +74,7 @@ angular.module('acroScore.viewScores', [
 			$scope.setExtraAthleteNames();
 			// $location.path('/viewScores');
 			// $scope.scoresQueried = dataFromFactory;
+			$scope.formatAthleteChartData(dataFromFactory);
 		})
 		$scope.athleteOrMeetToSearch = "";
 		$scope.searchDatabaseFor = "";
@@ -95,6 +100,32 @@ angular.module('acroScore.viewScores', [
 
 	$scope.showScoreGraph = function() {
 		$scope.listOrGraphScores = 'graph';
+	}
+
+	$scope.formatAthleteChartData = function(array) { // takes array of objects as the input
+		// push into athleteChartData an array of each series to graph
+		// [0] = balance, [1] = dynamic, [2] = combined
+		var balanceArray = [];
+		var dynamicArray = [];
+		var combinedArray = [];
+
+		for (var i = 0; i < array.length; i++) {
+			if (array[i].routineType === 'balance') {
+				balanceArray.push(array[i].total);
+			} else if (array[i].routineType === 'dynamic') {
+				dynamicArray.push(array[i].total);
+			} else if (array[i].routineType === 'combined') {
+				combinedArray.push(array[i].total);
+			}
+
+			if (array[i].routineType === null) {
+
+			}
+			// $scope.chartLabels.push(array[i])
+		}
+
+		$scope.athleteChartData.push(balanceArray, dynamicArray, combinedArray);
+		console.log("$scope.athleteChartData", $scope.athleteChartData);
 	}
 
 }])
