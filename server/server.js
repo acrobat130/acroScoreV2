@@ -523,7 +523,7 @@ app.post('/api/getscoresfromathletes', function(req, res) {
 					var pairgroupsID = result.rows[0].pairgroups_id;
 
 					// select scores where the athletes match
-					var queryScoresFromAthletes = client.query('SELECT * FROM "scores" INNER JOIN pairgroups ON scores.pairgroup_id = pairgroups.pairgroups_id INNER JOIN "meetNames" ON scores."meetID" = "meetNames"."meetID" WHERE scores.pairgroup_id = $1',
+					var queryScoresFromAthletes = client.query('SELECT * FROM "scores" INNER JOIN pairgroups ON scores.pairgroup_id = pairgroups.pairgroups_id INNER JOIN "meetNames" ON scores."meetID" = "meetNames"."meetID" WHERE scores.pairgroup_id = $1 ORDER BY "scores"."meetID"',
 						[pairgroupsID]);
 
 					queryScoresFromAthletes.on('row', function(row) {
