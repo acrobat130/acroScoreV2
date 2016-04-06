@@ -1,7 +1,7 @@
 angular.module('acroScore.viewScores', [
 	// add dependencies here
 	'acroScore.factories',
-
+	'chart.js'
 	])
 
 // if there are factory dependencies, add function it depends on as a function argument

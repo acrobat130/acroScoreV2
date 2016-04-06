@@ -32,10 +32,10 @@ angular.module('acroScore', [
 	}
 ])
 
-.controller('NavController', ['$scope', 'getPostFactory', function($scope, getPostFactory) {
-	console.log("inside NavController")
+// .controller('NavController', ['$scope', 'getPostFactory', function($scope, getPostFactory) {
+// 	console.log("inside NavController")
 
-	$scope.getAthletesAndMeets = function() {
-		getPostFactory.fetchAthletesAndMeets();
-	}
-}])
+// 	$scope.getAthletesAndMeets = function() {
+// 		getPostFactory.fetchAthletesAndMeets();
+// 	}
+// }])
