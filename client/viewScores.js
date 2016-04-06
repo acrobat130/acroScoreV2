@@ -15,7 +15,7 @@ angular.module('acroScore.viewScores', [
 	$scope.listOrGraphScores = 'list'; // changes to 'graph' when graph button is clicked
 	$scope.athleteChartData = []; // [0] = balance, [1] = dynamic, [2] = combined
 	$scope.meetsArray = [];
-	$scope.chartSeries = ['Balance', 'Dynamic', 'Combined'];
+	$scope.chartSeries = ['Balance', 'Dynamic', 'Combined', 'MeetTotal'];
 
 	//load athletelist and meetlist for search functionality
 	getPostFactory.fetchAthletesAndMeets().then(function(dataFromFactory) {
@@ -110,6 +110,7 @@ angular.module('acroScore.viewScores', [
 		var dynamicArray = [];
 		var combinedArray = [];
 		var meetTotalScoreArray = [];
+		var meetNamesArray = [];
 		// object for storing scores grouped by each meet
 		var meetDetailsObj = {};
 
@@ -140,14 +141,25 @@ angular.module('acroScore.viewScores', [
 				var balance = Number(meetDetailsObj[meet].balance);
 				var dynamic = Number(meetDetailsObj[meet].dynamic);
 				var combined = Number(meetDetailsObj[meet].combined);
+				var meetName = meetDetailsObj[meet].name;
+
+				// set meet total
 				meetDetailsObj[meet].meetTotal = balance + dynamic + combined;
+
+				// push all scores and meet name to arrays for chart
+				balanceArray.push(balance);
+				dynamicArray.push(dynamic);
+				combinedArray.push(combined);
+				meetTotalScoreArray.push(meetDetailsObj[meet].meetTotal);
+				meetNamesArray.push(meetName);
+
 			}
 		}
-
 		console.log("meetDetailsObj", meetDetailsObj)
 
 
-		$scope.athleteChartData.push(balanceArray, dynamicArray, combinedArray, meetTotalScoreArray);
+		$scope.athleteChartData = [balanceArray, dynamicArray, combinedArray, meetTotalScoreArray];
+		$scope.meetsArray = meetNamesArray;
 		console.log("$scope.athleteChartData", $scope.athleteChartData);
 	}
 
