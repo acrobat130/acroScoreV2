@@ -11,6 +11,7 @@ angular.module('acroScore.viewScores', [
 	$scope.athleteList;
 	$scope.meetList;
 	$scope.showMeetsOrAthletes = 'athletes'; // change to meets to change to meet display view
+	$scope.listOrGraphScores = 'list'; // changes to 'graph' when graph button is clicked
 
 	//load athletelist and meetlist for search functionality
 	getPostFactory.fetchAthletesAndMeets().then(function(dataFromFactory) {
@@ -87,6 +88,14 @@ angular.module('acroScore.viewScores', [
 		$scope.athleteOrMeetToSearch = "";
 		$scope.searchDatabaseFor = "";
 	};
+
+	$scope.showScoreList = function() {
+		$scope.listOrGraphScores = 'list';
+	}
+
+	$scope.showScoreGraph = function() {
+		$scope.listOrGraphScores = 'graph';
+	}
 
 }])
 
