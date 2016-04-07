@@ -107,6 +107,7 @@ angular.module('acroScore.viewScores', [
 
 	$scope.changeScoreJustAdded = function() {
 		getPostFactory.scoreJustAdded.wasScoreJustAdded = false;
+		console.log("$scope.scoreJustAdded", $scope.scoreJustAdded)
 	}
 
 	$scope.formatAthleteChartData = function(array) { // takes array of objects as the input
