@@ -104,6 +104,12 @@ angular.module('acroScore.viewScores', [
 	}
 
 	$scope.showScoreGraph = function() {
+		// load graph if it wasn't loaded yet
+		if (getPostFactory.scoreJustAdded.wasScoreJustAdded === true) {
+			var dataForChart = getPostFactory.formatAthleteChartData($scope.scoresQueried.data)
+			$scope.athleteChartData = dataForChart.athleteChartData;
+			$scope.meetsArray = dataForChart.meetsArray;
+		}
 		$scope.listOrGraphScores = 'graph';
 	}
 
