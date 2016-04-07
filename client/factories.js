@@ -6,6 +6,8 @@ angular.module('acroScore.factories', [])
 	var groupJustPosted = {};
 	var athleteList = {};
 	var meetList = {};
+	var scoreJustAdded = {
+		wasScoreJustAdded: false};
 
 	var consoleSomething = function(scoreInfoFromUserInput) {
 		console.log("inside getPostFactory");
@@ -24,6 +26,7 @@ angular.module('acroScore.factories', [])
 			console.log("data successfully posted");
 			console.log("response returned from post", response)
 			groupJustPosted.data = response.data;
+			scoreJustAdded.wasScoreJustAdded = true;
 			return response.data;
 		})
 	};
@@ -78,7 +81,8 @@ angular.module('acroScore.factories', [])
 		getScoresFromMeets: getScoresFromMeets,
 		fetchAthletesAndMeets: fetchAthletesAndMeets,
 		athleteList: athleteList,
-		meetList: meetList
+		meetList: meetList,
+		scoreJustAdded: scoreJustAdded
 	};
 }])
 

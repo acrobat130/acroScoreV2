@@ -7,10 +7,10 @@
 			<!-- search field info -->
 			<h4>Search for Scores</h4>
 			<!-- search by athlete or meet -->
-			<select ng-model="searchDatabaseFor">
+			<select ng-model="searchDatabaseFor" >
 				<option value="" selected>Search by</option>
-				<option value="athletes">Athletes</option>
-				<option value="meets" ng-model="meetsOption">Meets</option>
+				<option value="athletes" ng-click="changeScoreJustAdded()">Athletes</option>
+				<option value="meets" ng-model="meetsOption" ng-click="$parent.changeScoreJustAdded()">Meets</option>
 			</select>
 			<!-- athletes or meet to search for -->
 			<input type="text" ng-model="athleteOrMeetToSearch" placeholder="athlete(s) or meet name"></input>
@@ -55,7 +55,7 @@
 
 	<!-- score listings and graphs -->
 	<!-- only show score listings if athletes and meets search info isn't showing -->
-	<div ng-if="searchDatabaseFor===''" ng-show="scoreQueryLoaded()">
+	<div ng-if="scoreJustAdded.wasScoreJustAdded || searchDatabaseFor===''" ng-show="scoreQueryLoaded()">
 		<h3>view scores from the database</h3>
 		<button ng-model="listScores" ng-click="showScoreList()">List Scores</button>
 		<button ng-model="graphScores" ng-click="showScoreGraph()">Graph Scores</button>
