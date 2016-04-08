@@ -141,6 +141,87 @@ angular.module('acroScore.factories', [])
 		this.meetTotal = null;
 	}
 
+	var formatMeetChartData = function(array) {
+		// push into athleteChartData an array of each series to graph
+		// [0] = balance, [1] = dynamic, [2] = combined
+		console.log("input array", array)
+		var balanceArray = [];
+		var dynamicArray = [];
+		var combinedArray = [];
+		var meetTotalScoreArray = [];
+		var pairgroupsArray = [];
+
+		var groupDetailsObj = {};
+		var resultsObj = {};
+
+		// iterate through array of scores
+		for (var i = 0; i < array.length; i++) {
+			var groupNameSetter = function() {
+				var result = array[i].athlete1 + ' ' + array[i].athlete2;
+				if (array[i].athlete3 !== null) {
+					result += ' ' + array[i].athlete3;
+					if (array[i].athlete4 !== null) {
+						result += ' ' + array[i].athlete4
+					}
+				}
+				return result;
+			}
+			var groupName = groupNameSetter();
+			var routineTotal = Number(array[i].total);
+
+			// add group to the groupDetails obj if it's not already in there
+			if (!groupDetailsObj[groupName]) {
+				groupDetailsObj[groupName] = new Group(groupName);
+			}
+			// add score to meetdetails obj
+			if (array[i].routineType === 'balance') {
+				groupDetailsObj[groupName].balance = routineTotal;
+			} else if (array[i].routineType === 'dynamic') {
+				groupDetailsObj[groupName].dynamic = routineTotal;
+			} else if (array[i].routineType === 'combined') {
+				groupDetailsObj[groupName].combined = routineTotal;
+			}
+
+		}
+
+		// iterate through groupDetails obj to calculate meetTotals
+		for (var group in groupDetailsObj) {
+			if (groupDetailsObj.hasOwnProperty(group)) {
+				var balance = Number(groupDetailsObj[group].balance);
+				var dynamic = Number(groupDetailsObj[group].dynamic);
+				var combined = Number(groupDetailsObj[group].combined);
+				var groupName = groupDetailsObj[group].groupName;
+
+				// set meet total
+				groupDetailsObj[group].meetTotal = balance + dynamic + combined;
+
+				// push all scores and group name to arrays for chart
+				balanceArray.push(balance);
+				dynamicArray.push(dynamic);
+				combinedArray.push(combined);
+				meetTotalScoreArray.push(groupDetailsObj[group].meetTotal);
+				pairgroupsArray.push(groupName);
+			}
+		}
+		// console.log("balanceArray", balanceArray);
+		// console.log("dynamicArray", dynamicArray);
+		// console.log("combinedArray", combinedArray);
+		// console.log("meetTotalScoreArray", meetTotalScoreArray);
+
+		resultsObj.meetChartData = [balanceArray, dynamicArray, combinedArray, meetTotalScoreArray];
+		resultsObj.pairgroupsArray = pairgroupsArray;
+		console.log("resultsObj", resultsObj)
+		return resultsObj;
+	}
+
+	var Group = function(groupName) {
+		this.groupName = groupName;
+		this.balance = null;
+		this.dynamic = null;
+		this.combined = null;
+		this.meetTotal = null;
+	}
+
 	return {
 		test: consoleSomething,
 		postScore: postScore,
@@ -151,7 +232,8 @@ angular.module('acroScore.factories', [])
 		athleteList: athleteList,
 		meetList: meetList,
 		scoreJustAdded: scoreJustAdded,
-		formatAthleteChartData: formatAthleteChartData
+		formatAthleteChartData: formatAthleteChartData,
+		formatMeetChartData: formatMeetChartData
 	};
 }])
 

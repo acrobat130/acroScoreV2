@@ -13,9 +13,15 @@ angular.module('acroScore.viewScores', [
 	$scope.meetList;
 	$scope.showMeetsOrAthletes = 'athletes'; // change to meets to change to meet display view
 	$scope.listOrGraphScores = 'list'; // changes to 'graph' when graph button is clicked
-	$scope.athleteChartData = []; // [0] = balance, [1] = dynamic, [2] = combined
+
+	$scope.athleteChartData = []; // [0] = balance, [1] = dynamic, [2] = combined, [3] = meetTotal
+	$scope.meetChartData = []; // [0] = balance, [1] = dynamic, [2] = combined, [3] = meetTotal
+
 	$scope.meetsArray = [];
-	$scope.chartSeries = ['Balance', 'Dynamic', 'Combined', 'MeetTotal'];
+	$scope.pairgroupsArray = [];
+
+	$scope.athleteChartSeries = ['Balance', 'Dynamic', 'Combined', 'MeetTotal'];
+	$scope.meetChartSeries = ['Balance', 'Dynamic', 'Combined', 'MeetTotal'];
 
 	$scope.scoreJustAdded = getPostFactory.scoreJustAdded;
 
@@ -94,6 +100,10 @@ angular.module('acroScore.viewScores', [
 		getPostFactory.getScoresFromMeets($scope.dataForRequest).then(function(dataFromFactory) {
 			$scope.setExtraAthleteNames();
 			$scope.showMeetsOrAthletes = 'meets';
+
+			var dataForChart = getPostFactory.formatMeetChartData(dataFromFactory);
+			$scope.meetChartData = dataForChart.meetChartData;
+			$scope.pairgroupsArray = dataForChart.pairgroupsArray;
 		})
 		$scope.athleteOrMeetToSearch = "";
 		$scope.searchDatabaseFor = "";

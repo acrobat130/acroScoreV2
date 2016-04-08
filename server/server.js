@@ -565,7 +565,7 @@ app.post('/api/getscoresfrommeets', function(req, res) {
 					var meetID = result.rows[0].meetID;
 
 					// select scores where the meet id's match
-					var queryScoresFromMeets = client.query('SELECT * FROM "scores" INNER JOIN pairgroups ON scores.pairgroup_id = pairgroups.pairgroups_id INNER JOIN "meetNames" ON scores."meetID" = "meetNames"."meetID" WHERE scores."meetID" = $1',
+					var queryScoresFromMeets = client.query('SELECT * FROM "scores" INNER JOIN pairgroups ON scores.pairgroup_id = pairgroups.pairgroups_id INNER JOIN "meetNames" ON scores."meetID" = "meetNames"."meetID" WHERE scores."meetID" = $1 ORDER BY "pairgroups"."pairgroups_id"',
 						[meetID]);
 
 					queryScoresFromMeets.on('row', function(row) {
