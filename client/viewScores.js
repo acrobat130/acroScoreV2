@@ -104,6 +104,7 @@ angular.module('acroScore.viewScores', [
 			var dataForChart = getPostFactory.formatMeetChartData(dataFromFactory);
 			$scope.meetChartData = dataForChart.meetChartData;
 			$scope.pairgroupsArray = dataForChart.pairgroupsArray;
+			console.log("$scope.scoresQueried", $scope.scoresQueried)
 		})
 		$scope.athleteOrMeetToSearch = "";
 		$scope.searchDatabaseFor = "";

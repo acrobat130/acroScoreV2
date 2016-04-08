@@ -135,9 +135,9 @@
 						<th>Score</th>
 						<th>Meet Total</th>
 					</tr>
-					<tr ng-repeat="score in scoresQueried.data | orderBy:['total']">
+					<tr ng-repeat="score in scoresQueried.data | orderBy:['pairgroups_id']">
 						<td>level/age group</td>
-						<td><span>{{scoresQueried.data[0].athlete1}}</span><span>, {{scoresQueried.data[0].athlete2}}</span><span ng-show="thirdAthlete">, {{scoresQueried.data[0].athlete3}}</span><span ng-show="fourthAthlete">, {{scoresQueried.data[0].athlete4}}</span></td>
+						<td><span>{{score.athlete1}}</span><span>, {{score.athlete2}}</span><span ng-show="thirdAthlete">, {{score.athlete3}}</span><span ng-show="fourthAthlete">, {{score.athlete4}}</span></td>
 						<td>{{score.teamName}}</td>
 						<td>{{score.routineType}}</td>
 						<td>{{score.execution}}</td>
