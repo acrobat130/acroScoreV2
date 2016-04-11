@@ -48,12 +48,18 @@
 		<h4>Enter Routine and Score Information</h4>
 	</div>
 
-	<!-- TODO: add level input field -->
-	<!-- TODO: add age group input field -->
+	<!-- level -->
 	<label>Level</label>
 	<select ng-model="level" ng-options="level for level in levelRange()">
 		<option value="" selected>Choose Level</option>
 	</select>
+
+	<!-- age group -->
+	<label>Age Group</label>
+	<input type="text" ng-model="ageGroup" placeholder="age group">
+
+	<br>
+
 	<!-- routine type -->
 	<label>Routine Type</label>
 	<select ng-model="routineType" required>
