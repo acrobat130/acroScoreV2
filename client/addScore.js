@@ -18,6 +18,17 @@ angular.module('acroScore.addScore', [
 		return yearsArray;
 	}
 
+	// generates array of levels for user to select when inputting routine info
+	$scope.levelRange = function() {
+		var levelsArray = [];
+		var startLevel = 1;
+		var endLevel = 10;
+		for (var i = startLevel; i <= endLevel; i++) {
+			levelsArray.push(i);
+		}
+		return levelsArray;
+	}
+
 	// updates total score when other score parameters are edited
 	$scope.updateScore = function() {
 		$scope.totalScore = $scope.artistryScore + $scope.executionScore + $scope.difficultyScore - $scope.penalties;

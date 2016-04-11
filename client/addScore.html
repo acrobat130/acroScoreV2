@@ -50,6 +50,10 @@
 
 	<!-- TODO: add level input field -->
 	<!-- TODO: add age group input field -->
+	<label>Level</label>
+	<select ng-model="level" ng-options="level for level in levelRange()">
+		<option value="" selected>Choose Level</option>
+	</select>
 	<!-- routine type -->
 	<label>Routine Type</label>
 	<select ng-model="routineType" required>

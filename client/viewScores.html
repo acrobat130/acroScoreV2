@@ -6,16 +6,18 @@
 		<fieldset>
 			<!-- search field info -->
 			<h4>Search for Scores</h4>
+
 			<!-- search by athlete or meet -->
 			<select ng-model="searchDatabaseFor" ng-change="changeScoreJustAdded()">
 				<option value="" selected>Search by</option>
 				<option value="athletes" ng-click="changeScoreJustAdded()">Athletes</option>
 				<option value="meets" ng-model="meetsOption">Meets</option>
 			</select>
+
 			<!-- athletes or meet to search for -->
 			<input type="text" ng-model="athleteOrMeetToSearch" placeholder="athlete(s) or meet name"></input>
+
 		</fieldset>
-		<!-- TODO: add submit button -->
 
 	</form>
 
