@@ -26,6 +26,7 @@ angular.module('acroScore.addScore', [
 		for (var i = startLevel; i <= endLevel; i++) {
 			levelsArray.push(i);
 		}
+		levelsArray.push("Jr. Elite", "Sr. Elite", "Elite", "11-16", "12-18", "13-19");
 		return levelsArray;
 	}
 
