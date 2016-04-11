@@ -1,6 +1,7 @@
 var express = require('express');
 var pg = require('pg');
 var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/acroDb'
+// URL from heroku postgres db: postgres://xqglthfdgjiodt:b6FNyHPL8v1ClbUFMezqb7GO-O@ec2-23-21-42-29.compute-1.amazonaws.com:5432/da8vkru069g43t
 var bodyParser = require('body-parser');
 var app = express();
 app.use(bodyParser.json());
