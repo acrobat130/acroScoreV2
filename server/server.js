@@ -1,12 +1,17 @@
 var express = require('express');
 var pg = require('pg');
 var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/acroDb'
-// URL from heroku postgres db: postgres://xqglthfdgjiodt:b6FNyHPL8v1ClbUFMezqb7GO-O@ec2-23-21-42-29.compute-1.amazonaws.com:5432/da8vkru069g43t?ssl=true
+// URL from heroku postgres db: postgres://xqglthfdgjiodt:b6FNyHPL8v1ClbUFMezqb7GO-O@ec2-23-21-42-29.compute-1.amazonaws.com:5432/da8vkru069g43t optional: ?ssl=true
 console.log("process.env.DATABASE_URL", process.env.DATABASE_URL)
 var bodyParser = require('body-parser');
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+
+// set ssl to true if using heroku postgres
+if (connectionString !== 'postgres://localhost:5432/acroDb') {
+	pg.defaults.ssl = true;
+}
 
 // initialize connection pool
 // keeps idle connections open for 30 seconds and set limit of 20
