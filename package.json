@@ -7,10 +7,14 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "shanna sullivan",
   "license": "ISC",
   "dependencies": {
+    "angular": "^1.5.3",
+    "angular-chart.js": "^0.9.0",
+    "angular-ui-router": "^0.2.18",
     "body-parser": "^1.15.0",
+    "bootstrap": "^3.3.6",
     "express": "^4.13.4",
     "pg": "^4.4.6"
   }
