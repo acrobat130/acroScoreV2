@@ -27,8 +27,12 @@ pg.connect(connectionString, function(err, client, done) {
 	});
 });
 
-// this line makes the ../ not seem malicious. doesn't work without this line
-app.use(express.static(__dirname + '/../client'))
+// serve client folder
+app.use(express.static(__dirname + '/../client'));
+
+// serve node_modules
+// TODO: find different solution; this is NOT best practice - node modules shouldn't be served
+app.use(express.static(__dirname + '/../node_modules'));
 
 app.get('/', function(req, res) {
 	res.sendFile(__dirname + '/../client/index.html');
