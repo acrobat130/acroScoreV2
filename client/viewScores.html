@@ -1,21 +1,21 @@
 <div>
-	<form id="searchDatabaseForm">
+	<form id="searchDatabaseForm" class="form-inline">
 	<!-- <form id="searchDatabaseForm" ng-submit="searchDatabase()"> -->
 
 
-		<fieldset>
+		<fieldset class="form-group">
 			<!-- search field info -->
 			<h4>Search for Scores</h4>
 
 			<!-- search by athlete or meet -->
-			<select ng-model="searchDatabaseFor" ng-change="changeScoreJustAdded()">
+			<select class="form-control" ng-model="searchDatabaseFor" ng-change="changeScoreJustAdded()">
 				<option value="" selected>Search by</option>
 				<option value="athletes" ng-click="changeScoreJustAdded()">Athletes</option>
 				<option value="meets" ng-model="meetsOption">Meets</option>
 			</select>
 
 			<!-- athletes or meet to search for -->
-			<input type="text" ng-model="athleteOrMeetToSearch" placeholder="athlete(s) or meet name"></input>
+			<input class="form-control" type="text" ng-model="athleteOrMeetToSearch" placeholder="athlete(s) or meet name"></input>
 
 		</fieldset>
 
@@ -59,8 +59,8 @@
 	<!-- only show score listings if athletes and meets search info isn't showing -->
 	<div ng-if="scoreJustAdded.wasScoreJustAdded || searchDatabaseFor===''" ng-show="scoreQueryLoaded()">
 		<h3>view scores from the database</h3>
-		<button ng-model="listScores" ng-click="showScoreList()">List Scores</button>
-		<button ng-model="graphScores" ng-click="showScoreGraph()">Graph Scores</button>
+		<button class="btn btn-default" ng-model="listScores" ng-click="showScoreList()">List Scores</button>
+		<button class="btn btn-default" ng-model="graphScores" ng-click="showScoreGraph()">Graph Scores</button>
 
 		<!-- athletes listings and graphs -->
 		<div ng-show="showMeetsOrAthletes==='athletes'">
