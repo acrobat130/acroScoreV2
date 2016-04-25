@@ -11,36 +11,45 @@
 
 </head>
 
-<body ng-app="acroScore">
+<body ng-app="acroScore" ng-controller="NavController">
     <!-- buttons/future navbar -->
 
-    <!-- menu button for small screen -->
+    <!-- navbar -->
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
+
+                <!-- small screen display -->
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
                     <span class="sr-only">Toggle navigation></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+
+                <!-- brand image -->
                 <a class="navbar-brand" ui-sref="home">
                     <img alt="Brand" src="assets/acroscoresLogo.jpg">
                 </a>
             </div>
 
+            <!-- navbar content -->
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
+                 <!--
                     <li class="active">
                         <a ui-sref="home">Home
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
-                    <li>
+                    <li ng-model="addScoreTab" ng-click="makeTabActive(addScoreTab)">
                         <a ui-sref="addScore">Add Score</a>
                     </li>
-                    <li>
+                    <li ng-model="viewScoresTab" ng-click="makeTabActive(viewScoresTab)">
                         <a ng-click="getAthletesAndMeets()" ui-sref="viewScores">View Scores</a>
+                    </li> -->
+                    <li ng-repeat="tab in navbarTabs" ng-click="select(tab)" ng-class="{active: isActive(tab)}">
+                        <a ui-sref="{{tab.sref}}">{{tab.name}}</a>
                     </li>
                 </ul>
             </div>

@@ -17,7 +17,8 @@ angular.module('acroScore', [
 		// these define the different states/views/controllers
 		$stateProvider
 			.state('home', {
-				url: '/'
+				url: '/'// ,
+				// controller: 'NavController'
 			})
 			.state('addScore', {
 				url: '/addScore',
@@ -29,13 +30,47 @@ angular.module('acroScore', [
 				templateUrl: 'viewScores.html',
 				controller: 'ViewScoresController'
 			})
+
+
 	}
 ])
 
-// .controller('NavController', ['$scope', 'getPostFactory', function($scope, getPostFactory) {
-// 	console.log("inside NavController")
+.controller('NavController', ['$scope', 'getPostFactory', function($scope, getPostFactory) {
+	console.log("inside NavController");
 
-// 	$scope.getAthletesAndMeets = function() {
-// 		getPostFactory.fetchAthletesAndMeets();
-// 	}
-// }])
+	$scope.navbarTabs = [
+		{
+			name: 'Home',
+			sref: 'home'
+		}, {
+			name: 'Add Score',
+			sref: 'addScore'
+		}, {
+			name: 'View Scores',
+			sref: 'viewScores'
+		}
+	];
+
+	$scope.select = function(item) {
+		$scope.selected = item;
+	};
+
+	$scope.isActive = function(item) {
+		return $scope.selected === item;
+	};
+
+	// select the home tab as active initially
+	$scope.selected = $scope.navbarTabs[0];
+	$scope.isActive($scope.selected);
+
+
+
+
+	// $scope.makeTabActive = function(activeTab) {
+	// 	activeTab.class = 'active'
+	// }
+
+	// $scope.getAthletesAndMeets = function() {
+	// 	getPostFactory.fetchAthletesAndMeets();
+	// }
+}])
