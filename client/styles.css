@@ -10,6 +10,7 @@ html {
 	margin: 0;
 }
 
+/* add transparency for background image */
 html::after {
 	position: fixed;
 	content: "";
