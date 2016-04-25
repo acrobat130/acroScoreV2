@@ -23,36 +23,40 @@
 
 	<!-- live-updating search results for athletes -->
 	<div ng-if="searchDatabaseFor==='athletes'">
-		<table class="resultsTable">
-			<tr>
-				<th>Athlete 1</th>
-				<th>Athlete 2</th>
-				<th>Athlete 3</th>
-				<th>Athlete 4</th>
-				<th>Team Name</th>
-			</tr>
-			<tr ng-repeat="group in athleteList | filter: athleteOrMeetToSearch" ng-click="$parent.searchDatabaseAthletes(group.athlete1, group.athlete2, group.athlete3, group.athlete4, group.teamName)">
-				<td>{{group.athlete1}}</td>
-				<td>{{group.athlete2}}</td>
-				<td>{{group.athlete3}}</td>
-				<td>{{group.athlete4}}</td>
-				<td>{{group.teamName}}</td>
-			</tr>
-		</table>
+		<div class="table-responsive col-md-8 col-md-offset-2">
+			<table class="resultsTable table table-condensed">
+				<tr>
+					<th>Athlete 1</th>
+					<th>Athlete 2</th>
+					<th>Athlete 3</th>
+					<th>Athlete 4</th>
+					<th>Team Name</th>
+				</tr>
+				<tr ng-repeat="group in athleteList | filter: athleteOrMeetToSearch" ng-click="$parent.searchDatabaseAthletes(group.athlete1, group.athlete2, group.athlete3, group.athlete4, group.teamName)">
+					<td>{{group.athlete1}}</td>
+					<td>{{group.athlete2}}</td>
+					<td>{{group.athlete3}}</td>
+					<td>{{group.athlete4}}</td>
+					<td>{{group.teamName}}</td>
+				</tr>
+			</table>
+		</div>
 	</div>
 
 	<!-- live-updating search results for meets -->
 	<div ng-if="searchDatabaseFor==='meets'">
-		<table class="resultsTable">
-			<tr>
-				<th>Meet Name</th>
-				<th>Year</th>
-			</tr>
-			<tr ng-repeat="meet in meetList | filter: athleteOrMeetToSearch" ng-click="$parent.searchDatabaseMeets(meet.meetName, meet.meetYear)">
-				<td>{{meet.meetName}}</td>
-				<td>{{meet.meetYear}}</td>
-			</tr>
-		</table>
+		<div class="table-responsive col-md-6 col-md-offset-3">
+			<table class="resultsTable table table-condensed">
+				<tr>
+					<th>Meet Name</th>
+					<th>Year</th>
+				</tr>
+				<tr ng-repeat="meet in meetList | filter: athleteOrMeetToSearch" ng-click="$parent.searchDatabaseMeets(meet.meetName, meet.meetYear)">
+					<td>{{meet.meetName}}</td>
+					<td>{{meet.meetYear}}</td>
+				</tr>
+			</table>
+		</div>
 	</div>
 
 	<!-- score listings and graphs -->
