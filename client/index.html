@@ -12,6 +12,42 @@
 </head>
 
 <body ng-app="acroScore">
+    <!-- buttons/future navbar -->
+
+    <!-- menu button for small screen -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" ui-sref="home">
+                    <img alt="Brand" src="assets/acroscoresLogo.jpg">
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a ui-sref="home">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a ui-sref="addScore">Add Score</a>
+                    </li>
+                    <li>
+                        <a ng-click="getAthletesAndMeets()" ui-sref="viewScores">View Scores</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
     <!-- heading, tagline -->
     <div>
         <center>
@@ -19,8 +55,14 @@
             <h2>online database of acrobatic gymnastics meet scores</h2>
         </center>
     </div>
-    <!-- buttons/future navbar -->
-    <!-- <div ng-controller="NavController"> -->
+
+
+
+
+
+
+
+
     <div>
         <ul>
             <button ui-sref="home">home</button>
