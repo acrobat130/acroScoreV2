@@ -41,6 +41,11 @@ body {
 	background: rgba(248, 248, 248, .5);
 }
 
+/* right-align jumbotron text */
+.jumbotron h1, .jumbotron p {
+	text-align: center;
+}
+
 /* add background to about sections */
 .about div div{
 	background: rgba(248, 248, 248, .5);
