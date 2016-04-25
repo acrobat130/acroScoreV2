@@ -17,8 +17,16 @@ angular.module('acroScore', [
 		// these define the different states/views/controllers
 		$stateProvider
 			.state('home', {
-				url: '/'// ,
-				// controller: 'NavController'
+				url: '/',
+				// params: {
+				// 	autoActivateChild: 'home.about'
+				// },
+				abstract: true,
+				template: "<div ui-view></div>"
+			})
+			.state('home.about', {
+				url: '',
+				templateUrl: 'about.html'
 			})
 			.state('addScore', {
 				url: '/addScore',
@@ -41,7 +49,7 @@ angular.module('acroScore', [
 	$scope.navbarTabs = [
 		{
 			name: 'Home',
-			sref: 'home'
+			sref: 'home.about'
 		}, {
 			name: 'Add Score',
 			sref: 'addScore'
