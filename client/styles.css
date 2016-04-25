@@ -23,8 +23,13 @@ html::after {
 }
 
 /* brand image sizing */
-.navbar-brand {
+.acroscoresLogo {
 	padding-top: 5px;
+}
+
+/* removes extra margin that brand name adds */
+.acroscoresName {
+	margin-bottom: 0px;
 }
 
 .navbar-brand img {
