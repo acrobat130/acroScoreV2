@@ -57,3 +57,19 @@ body {
 	padding: 10px;
 	border-radius: 6px;
 }
+
+/* center elements on view scores page */
+fieldset h3, .scoreSearch {
+	text-align: center;
+}
+
+.resultsTable {
+	margin: 0 auto;
+}
+
+
+
+
+
+
+

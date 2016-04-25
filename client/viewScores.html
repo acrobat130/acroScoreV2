@@ -1,11 +1,11 @@
 <div>
-	<form id="searchDatabaseForm" class="form-inline">
+	<form id="searchDatabaseForm" class="form-inline row">
 	<!-- <form id="searchDatabaseForm" ng-submit="searchDatabase()"> -->
 
 
-		<fieldset class="form-group">
+		<fieldset class="form-group col-xs-12 scoreSearch">
 			<!-- search field info -->
-			<h4>Search for Scores</h4>
+			<h3>Search for Scores</h3>
 
 			<!-- search by athlete or meet -->
 			<select class="form-control" ng-model="searchDatabaseFor" ng-change="changeScoreJustAdded()">
@@ -23,7 +23,7 @@
 
 	<!-- live-updating search results for athletes -->
 	<div ng-if="searchDatabaseFor==='athletes'">
-		<table>
+		<table class="resultsTable">
 			<tr>
 				<th>Athlete 1</th>
 				<th>Athlete 2</th>
@@ -43,7 +43,7 @@
 
 	<!-- live-updating search results for meets -->
 	<div ng-if="searchDatabaseFor==='meets'">
-		<table>
+		<table class="resultsTable">
 			<tr>
 				<th>Meet Name</th>
 				<th>Year</th>
