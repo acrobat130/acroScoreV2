@@ -1,6 +1,6 @@
 <div>
 
-<form id="addScoreForm" class="form-inline row" ng-submit="addScoreToDatabase()">
+<form id="addScoreForm" class="form-horizontal" ng-submit="addScoreToDatabase()">
 
 	<div class="addScoreTitle">
 		<h3>Add an Acro Score to the Database</h3>
@@ -12,18 +12,27 @@
 		</div>
 
 		<!-- meet name -->
-		<label>Meet Name</label>
-		<input type="text" ng-model="meetName" placeholder="meet name">
-		<label>Year</label>
-		<select ng-model="year" ng-options="year for year in yearRange()">
-			<option value="" selected>Choose Year</option>
-		</select>
+		<div class="form-group">
+			<label class="col-xs-2 control-label">Meet Name</label>
+			<div class="col-xs-10">
+				<input type="text" class="form-control" ng-model="meetName" placeholder="Meet Name">
+			</div>
+		</div>
+		<!-- meet year -->
+		<div class="form-group">
+			<label class="col-xs-2 control-label">Year</label>
+			<div class="col-xs-10">
+				<select class="form-control" ng-model="year" ng-options="year for year in yearRange()">
+					<option value="" selected>Choose Year</option>
+				</select>
+			</div>
+		</div>
 		<!-- TODO: add input field for month or specific date -->
 	</fieldset>
 
 	<fieldset>
 		<div>
-			<h4>Enter Athlete Information</h4>
+			<h4>Enter Pair/Group Information</h4>
 		</div>
 
 		<!-- group number -->
@@ -32,18 +41,23 @@
 
 		<br> -->
 
-		<!-- group names  -->
-		<label>Pair/Group Names</label>
-		<input type="text" ng-model="athlete1" placeholder="athlete #1 name">
-		<input type="text" ng-model="athlete2" placeholder="athlete #2 name">
-		<input type="text" ng-model="athlete3" placeholder="athlete #3 name">
-		<input type="text" ng-model="athlete4" placeholder="athlete #4 name">
-
-		<br>
+		<!-- pair/group names  -->
+		<div class="form-group">
+			<label class="col-xs-2 control-label">Athlete Names</label>
+			<div class="col-xs-10">
+				<input type="text" class="form-control" ng-model="athlete1" placeholder="Athlete #1 Name">
+				<input type="text" class="form-control" ng-model="athlete2" placeholder="Athlete #2 Name">
+				<input type="text" class="form-control" ng-model="athlete3" placeholder="Athlete #3 Name">
+				<input type="text" class="form-control" ng-model="athlete4" placeholder="Athlete #4 Name">
+			</div>
+		</div>
+		<!-- <br> -->
 
 		<!-- team -->
-		<label>Acro Team Name</label>
-		<input type="text" ng-model="teamName" placeholder="team name">
+		<div class="form-group">
+			<label>Acro Team Name</label>
+			<input type="text" class="form-control" ng-model="teamName" placeholder="team name">
+		</div>
 	</fieldset>
 
 	<fieldset>
@@ -52,52 +66,68 @@
 		</div>
 
 		<!-- level -->
-		<label>Level</label>
-		<select ng-model="level" ng-options="level for level in levelRange()">
-			<option value="" selected>Choose Level</option>
-		</select>
+		<div class="form-group">
+			<label>Level</label>
+			<select ng-model="level" class="form-control" ng-options="level for level in levelRange()">
+				<option value="" selected>Choose Level</option>
+			</select>
+		</div>
 
 		<!-- age group -->
-		<label>Age Group</label>
-		<input type="text" ng-model="ageGroup" placeholder="age group">
+		<div class="form-group">
+			<label>Age Group</label>
+			<input type="text" class="form-control" ng-model="ageGroup" placeholder="age group">
+		</div>
 
-		<br>
+		<!-- <br> -->
 
 		<!-- routine type -->
-		<label>Routine Type</label>
-		<select ng-model="routineType" required>
-			<option value="" selected>Choose Routine Type</option>
-			<option value="balance">Balance</option>
-			<option value="dynamic">Dynamic</option>
-			<option value="combined">Combined</option>
-		</select>
+		<div class="form-group">
+			<label>Routine Type</label>
+			<select ng-model="routineType" class="form-control" required>
+				<option value="" selected>Choose Routine Type</option>
+				<option value="balance">Balance</option>
+				<option value="dynamic">Dynamic</option>
+				<option value="combined">Combined</option>
+			</select>
+		</div>
 
-		<br>
+		<!-- <br> -->
 
 		<!-- execution score -->
-		<label>Execution</label>
-		<input type="number" step="any" ng-model="executionScore" ng-init="executionScore=0" ng-change = "updateScore()">
+		<div class="form-group">
+			<label>Execution</label>
+			<input type="number" class="form-control" step="any" ng-model="executionScore" ng-init="executionScore=0" ng-change = "updateScore()">
+		</div>
 
 		<!-- artistry score -->
-		<label>Artistry</label>
-		<input type="number" step="any" ng-model="artistryScore" ng-init="artistryScore=0" ng-change = "updateScore()">
+		<div class="form-group">
+			<label>Artistry</label>
+			<input type="number" class="form-control" step="any" ng-model="artistryScore" ng-init="artistryScore=0" ng-change = "updateScore()">
+		</div>
 
 		<!-- difficlty score -->
-		<label>Difficulty</label>
-		<input type="number" step="any" ng-model="difficultyScore" ng-init="difficultyScore=0" ng-change = "updateScore()">
+		<div class="form-group">
+			<label>Difficulty</label>
+			<input type="number" class="form-control" step="any" ng-model="difficultyScore" ng-init="difficultyScore=0" ng-change = "updateScore()">
+		</div>
 
 		<!-- penalties (enter a positive number)-->
-		<label>Penalties (enter positive number)</label>
-		<input type="number" step="any" ng-model="penalties" ng-init="penalties=0" ng-change = "updateScore()">
+		<div class="form-group">
+			<label>Penalties (enter positive number)</label>
+			<input type="number" class="form-control" step="any" ng-model="penalties" ng-init="penalties=0" ng-change = "updateScore()">
+		</div>
 
-		<br>
+		<!-- <br> -->
 
 		<!-- total score -->
-		<label>Total Routine Score</label>
-		<input type="number" step="any" ng-model="totalScore" ng-init="totalScore=0" ng-blur="validateScore()">
+		<div class="form-group">
+			<label>Total Routine Score</label>
+			<input type="number" class="form-control" step="any" ng-model="totalScore" ng-init="totalScore=0" ng-blur="validateScore()">
+		</div>
 	</fieldset>
 
-	<button type="submit">Add score to the database</button>
+	<button type="submit" class="btn btn-default">Submit</button>
 
 </form>
 
