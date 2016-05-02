@@ -59,7 +59,7 @@ body {
 }
 
 /* center elements on view scores page */
-fieldset h3, .scoreSearch {
+fieldset h3, .scoreSearch, .addScoreTitle {
 	text-align: center;
 }
 

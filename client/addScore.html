@@ -1,100 +1,103 @@
 <div>
-<h3>Add an Acro Score to the Database</h3>
 
-<form id="addScoreForm" ng-submit="addScoreToDatabase()">
+<form id="addScoreForm" class="form-inline row" ng-submit="addScoreToDatabase()">
 
-<fieldset>
-	<div>
-		<h4>Enter Meet Information</h4>
+	<div class="addScoreTitle">
+		<h3>Add an Acro Score to the Database</h3>
 	</div>
 
-	<!-- meet name -->
-	<label>Meet Name</label>
-	<input type="text" ng-model="meetName" placeholder="meet name">
-	<label>Year</label>
-	<select ng-model="year" ng-options="year for year in yearRange()">
-		<option value="" selected>Choose Year</option>
-	</select>
-	<!-- TODO: add input field for month or specific date -->
-</fieldset>
+	<fieldset>
+		<div>
+			<h4>Enter Meet Information</h4>
+		</div>
 
-<fieldset>
-	<div>
-		<h4>Enter Athlete Information</h4>
-	</div>
+		<!-- meet name -->
+		<label>Meet Name</label>
+		<input type="text" ng-model="meetName" placeholder="meet name">
+		<label>Year</label>
+		<select ng-model="year" ng-options="year for year in yearRange()">
+			<option value="" selected>Choose Year</option>
+		</select>
+		<!-- TODO: add input field for month or specific date -->
+	</fieldset>
 
-	<!-- group number -->
-	<!-- <label>Pair/Group Number</label>
-	<input type="text" ng-model="groupNumber" placeholder="pair/group number">
+	<fieldset>
+		<div>
+			<h4>Enter Athlete Information</h4>
+		</div>
 
-	<br> -->
+		<!-- group number -->
+		<!-- <label>Pair/Group Number</label>
+		<input type="text" ng-model="groupNumber" placeholder="pair/group number">
 
-	<!-- group names  -->
-	<label>Pair/Group Names</label>
-	<input type="text" ng-model="athlete1" placeholder="athlete #1 name">
-	<input type="text" ng-model="athlete2" placeholder="athlete #2 name">
-	<input type="text" ng-model="athlete3" placeholder="athlete #3 name">
-	<input type="text" ng-model="athlete4" placeholder="athlete #4 name">
+		<br> -->
 
-	<br>
+		<!-- group names  -->
+		<label>Pair/Group Names</label>
+		<input type="text" ng-model="athlete1" placeholder="athlete #1 name">
+		<input type="text" ng-model="athlete2" placeholder="athlete #2 name">
+		<input type="text" ng-model="athlete3" placeholder="athlete #3 name">
+		<input type="text" ng-model="athlete4" placeholder="athlete #4 name">
 
-	<!-- team -->
-	<label>Acro Team Name</label>
-	<input type="text" ng-model="teamName" placeholder="team name">
-</fieldset>
+		<br>
 
-<fieldset>
-	<div>
-		<h4>Enter Routine and Score Information</h4>
-	</div>
+		<!-- team -->
+		<label>Acro Team Name</label>
+		<input type="text" ng-model="teamName" placeholder="team name">
+	</fieldset>
 
-	<!-- level -->
-	<label>Level</label>
-	<select ng-model="level" ng-options="level for level in levelRange()">
-		<option value="" selected>Choose Level</option>
-	</select>
+	<fieldset>
+		<div>
+			<h4>Enter Routine and Score Information</h4>
+		</div>
 
-	<!-- age group -->
-	<label>Age Group</label>
-	<input type="text" ng-model="ageGroup" placeholder="age group">
+		<!-- level -->
+		<label>Level</label>
+		<select ng-model="level" ng-options="level for level in levelRange()">
+			<option value="" selected>Choose Level</option>
+		</select>
 
-	<br>
+		<!-- age group -->
+		<label>Age Group</label>
+		<input type="text" ng-model="ageGroup" placeholder="age group">
 
-	<!-- routine type -->
-	<label>Routine Type</label>
-	<select ng-model="routineType" required>
-		<option value="" selected>Choose Routine Type</option>
-		<option value="balance">Balance</option>
-		<option value="dynamic">Dynamic</option>
-		<option value="combined">Combined</option>
-	</select>
+		<br>
 
-	<br>
+		<!-- routine type -->
+		<label>Routine Type</label>
+		<select ng-model="routineType" required>
+			<option value="" selected>Choose Routine Type</option>
+			<option value="balance">Balance</option>
+			<option value="dynamic">Dynamic</option>
+			<option value="combined">Combined</option>
+		</select>
 
-	<!-- execution score -->
-	<label>Execution</label>
-	<input type="number" step="any" ng-model="executionScore" ng-init="executionScore=0" ng-change = "updateScore()">
+		<br>
 
-	<!-- artistry score -->
-	<label>Artistry</label>
-	<input type="number" step="any" ng-model="artistryScore" ng-init="artistryScore=0" ng-change = "updateScore()">
+		<!-- execution score -->
+		<label>Execution</label>
+		<input type="number" step="any" ng-model="executionScore" ng-init="executionScore=0" ng-change = "updateScore()">
 
-	<!-- difficlty score -->
-	<label>Difficulty</label>
-	<input type="number" step="any" ng-model="difficultyScore" ng-init="difficultyScore=0" ng-change = "updateScore()">
+		<!-- artistry score -->
+		<label>Artistry</label>
+		<input type="number" step="any" ng-model="artistryScore" ng-init="artistryScore=0" ng-change = "updateScore()">
 
-	<!-- penalties (enter a positive number)-->
-	<label>Penalties (enter positive number)</label>
-	<input type="number" step="any" ng-model="penalties" ng-init="penalties=0" ng-change = "updateScore()">
+		<!-- difficlty score -->
+		<label>Difficulty</label>
+		<input type="number" step="any" ng-model="difficultyScore" ng-init="difficultyScore=0" ng-change = "updateScore()">
 
-	<br>
+		<!-- penalties (enter a positive number)-->
+		<label>Penalties (enter positive number)</label>
+		<input type="number" step="any" ng-model="penalties" ng-init="penalties=0" ng-change = "updateScore()">
 
-	<!-- total score -->
-	<label>Total Routine Score</label>
-	<input type="number" step="any" ng-model="totalScore" ng-init="totalScore=0" ng-blur="validateScore()">
-</fieldset>
+		<br>
 
-<button type="submit">Add score to the database</button>
+		<!-- total score -->
+		<label>Total Routine Score</label>
+		<input type="number" step="any" ng-model="totalScore" ng-init="totalScore=0" ng-blur="validateScore()">
+	</fieldset>
+
+	<button type="submit">Add score to the database</button>
 
 </form>
 
