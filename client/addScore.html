@@ -13,15 +13,15 @@
 
 		<!-- meet name -->
 		<div class="form-group">
-			<label class="col-xs-2 control-label">Meet Name</label>
-			<div class="col-xs-10">
+			<label class="col-sm-2 control-label">Meet Name</label>
+			<div class="col-sm-8">
 				<input type="text" class="form-control" ng-model="meetName" placeholder="Meet Name">
 			</div>
 		</div>
 		<!-- meet year -->
 		<div class="form-group">
-			<label class="col-xs-2 control-label">Year</label>
-			<div class="col-xs-10">
+			<label class="col-sm-2 control-label">Year</label>
+			<div class="col-sm-8">
 				<select class="form-control" ng-model="year" ng-options="year for year in yearRange()">
 					<option value="" selected>Choose Year</option>
 				</select>
@@ -43,8 +43,8 @@
 
 		<!-- pair/group names  -->
 		<div class="form-group">
-			<label class="col-xs-2 control-label">Athlete Names</label>
-			<div class="col-xs-10">
+			<label class="col-sm-2 control-label">Athlete Names</label>
+			<div class="col-sm-8">
 				<input type="text" class="form-control" ng-model="athlete1" placeholder="Athlete #1 Name">
 				<input type="text" class="form-control" ng-model="athlete2" placeholder="Athlete #2 Name">
 				<input type="text" class="form-control" ng-model="athlete3" placeholder="Athlete #3 Name">
@@ -55,8 +55,10 @@
 
 		<!-- team -->
 		<div class="form-group">
-			<label>Acro Team Name</label>
-			<input type="text" class="form-control" ng-model="teamName" placeholder="team name">
+			<label class="col-sm-2 control-label">Acro Team Name</label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control" ng-model="teamName" placeholder="team name">
+			</div>
 		</div>
 	</fieldset>
 
@@ -67,67 +69,85 @@
 
 		<!-- level -->
 		<div class="form-group">
-			<label>Level</label>
-			<select ng-model="level" class="form-control" ng-options="level for level in levelRange()">
-				<option value="" selected>Choose Level</option>
-			</select>
+			<label class="col-sm-2 control-label">Level</label>
+			<div class="col-sm-8">
+				<select ng-model="level" class="form-control" ng-options="level for level in levelRange()">
+					<option value="" selected>Choose Level</option>
+				</select>
+			</div>
 		</div>
 
 		<!-- age group -->
 		<div class="form-group">
-			<label>Age Group</label>
-			<input type="text" class="form-control" ng-model="ageGroup" placeholder="age group">
+			<label class="col-sm-2 control-label">Age Group</label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control" ng-model="ageGroup" placeholder="age group">
+			</div>
 		</div>
 
 		<!-- <br> -->
 
 		<!-- routine type -->
 		<div class="form-group">
-			<label>Routine Type</label>
-			<select ng-model="routineType" class="form-control" required>
-				<option value="" selected>Choose Routine Type</option>
-				<option value="balance">Balance</option>
-				<option value="dynamic">Dynamic</option>
-				<option value="combined">Combined</option>
-			</select>
+			<label class="col-sm-2 control-label">Routine Type</label>
+			<div class="col-sm-8">
+				<select ng-model="routineType" class="form-control" required>
+					<option value="" selected>Choose Routine Type</option>
+					<option value="balance">Balance</option>
+					<option value="dynamic">Dynamic</option>
+					<option value="combined">Combined</option>
+				</select>
+			</div>
 		</div>
 
 		<!-- <br> -->
 
 		<!-- execution score -->
 		<div class="form-group">
-			<label>Execution</label>
-			<input type="number" class="form-control" step="any" ng-model="executionScore" ng-init="executionScore=0" ng-change = "updateScore()">
+			<label class="col-sm-2 control-label">Execution</label>
+			<div class="col-sm-8">
+				<input type="number" class="form-control" step="any" ng-model="executionScore" ng-init="executionScore=0" ng-change = "updateScore()">
+			</div>
 		</div>
 
 		<!-- artistry score -->
 		<div class="form-group">
-			<label>Artistry</label>
-			<input type="number" class="form-control" step="any" ng-model="artistryScore" ng-init="artistryScore=0" ng-change = "updateScore()">
+			<label class="col-sm-2 control-label">Artistry</label>
+			<div class="col-sm-8">
+				<input type="number" class="form-control" step="any" ng-model="artistryScore" ng-init="artistryScore=0" ng-change = "updateScore()">
+			</div>
 		</div>
 
 		<!-- difficlty score -->
 		<div class="form-group">
-			<label>Difficulty</label>
-			<input type="number" class="form-control" step="any" ng-model="difficultyScore" ng-init="difficultyScore=0" ng-change = "updateScore()">
+			<label class="col-sm-2 control-label">Difficulty</label>
+			<div class="col-sm-8">
+				<input type="number" class="form-control" step="any" ng-model="difficultyScore" ng-init="difficultyScore=0" ng-change = "updateScore()">
+			</div>
 		</div>
 
 		<!-- penalties (enter a positive number)-->
 		<div class="form-group">
-			<label>Penalties (enter positive number)</label>
-			<input type="number" class="form-control" step="any" ng-model="penalties" ng-init="penalties=0" ng-change = "updateScore()">
+			<label class="col-sm-2 control-label">Penalties (enter positive number)</label>
+			<div class="col-sm-8">
+				<input type="number" class="form-control" step="any" ng-model="penalties" ng-init="penalties=0" ng-change = "updateScore()">
+			</div>
 		</div>
 
 		<!-- <br> -->
 
 		<!-- total score -->
 		<div class="form-group">
-			<label>Total Routine Score</label>
-			<input type="number" class="form-control" step="any" ng-model="totalScore" ng-init="totalScore=0" ng-blur="validateScore()">
+			<label class="col-sm-2 control-label">Total Routine Score</label>
+			<div class="col-sm-8">
+				<input type="number" class="form-control" step="any" ng-model="totalScore" ng-init="totalScore=0" ng-blur="validateScore()">
+			</div>
 		</div>
 	</fieldset>
 
-	<button type="submit" class="btn btn-default">Submit</button>
+	<div class="text-center">
+		<button type="submit" role="submit" class="btn btn-default">Submit</button>
+	</div>
 
 </form>
 
