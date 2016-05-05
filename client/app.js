@@ -18,9 +18,6 @@ angular.module('acroScore', [
 		$stateProvider
 			.state('home', {
 				url: '/',
-				// params: {
-				// 	autoActivateChild: 'home.about'
-				// },
 				abstract: true,
 				template: "<div ui-view></div>"
 			})
