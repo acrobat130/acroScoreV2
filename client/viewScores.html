@@ -67,7 +67,7 @@
 		<button class="btn btn-default" ng-model="graphScores" ng-click="showScoreGraph()">Graph Scores</button>
 
 		<!-- athletes listings and graphs -->
-		<div ng-show="showMeetsOrAthletes==='athletes'">
+		<div class="text-center" ng-show="showMeetsOrAthletes==='athletes'">
 			<h4>
 				<span>Athletes:</span>
 				<span>{{scoresQueried.data[0].athlete1}}</span><span>, {{scoresQueried.data[0].athlete2}}</span><span ng-show="thirdAthlete">, {{scoresQueried.data[0].athlete3}}</span><span ng-show="fourthAthlete">, {{scoresQueried.data[0].athlete4}}</span>
