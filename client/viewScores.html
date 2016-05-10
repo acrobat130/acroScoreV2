@@ -63,8 +63,10 @@
 	<!-- only show score listings if athletes and meets search info isn't showing -->
 	<div ng-if="scoreJustAdded.wasScoreJustAdded || searchDatabaseFor===''" ng-show="scoreQueryLoaded()">
 		<!-- <h3>view scores from the database</h3> -->
-		<button class="btn btn-default" ng-model="listScores" ng-click="showScoreList()">List Scores</button>
-		<button class="btn btn-default" ng-model="graphScores" ng-click="showScoreGraph()">Graph Scores</button>
+		<div class="graphListButtons">
+			<button class="btn btn-default" ng-model="listScores" ng-click="showScoreList()">List Scores</button>
+			<button class="btn btn-default" ng-model="graphScores" ng-click="showScoreGraph()">Graph Scores</button>
+		</div>
 
 		<!-- athletes listings and graphs -->
 		<div class="text-center" ng-show="showMeetsOrAthletes==='athletes'">

@@ -68,7 +68,9 @@ fieldset h3, .scoreSearch, .addScoreTitle {
 	margin-top: 10px;
 }
 
-
+.graphListButtons {
+	float: left;
+}
 
 
 
