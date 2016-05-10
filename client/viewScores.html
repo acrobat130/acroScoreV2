@@ -63,21 +63,23 @@
 	<!-- only show score listings if athletes and meets search info isn't showing -->
 	<div ng-if="scoreJustAdded.wasScoreJustAdded || searchDatabaseFor===''" ng-show="scoreQueryLoaded()">
 		<!-- <h3>view scores from the database</h3> -->
-		<div class="graphListButtons">
+		<div class="col-md-offset-1 graphListButtons">
 			<button class="btn btn-default" ng-model="listScores" ng-click="showScoreList()">List Scores</button>
 			<button class="btn btn-default" ng-model="graphScores" ng-click="showScoreGraph()">Graph Scores</button>
 		</div>
 
 		<!-- athletes listings and graphs -->
 		<div class="text-center" ng-show="showMeetsOrAthletes==='athletes'">
-			<h4>
-				<span>Athletes:</span>
-				<span>{{scoresQueried.data[0].athlete1}}</span><span>, {{scoresQueried.data[0].athlete2}}</span><span ng-show="thirdAthlete">, {{scoresQueried.data[0].athlete3}}</span><span ng-show="fourthAthlete">, {{scoresQueried.data[0].athlete4}}</span>
-			</h4>
-			<h4>
-				<span>Team:</span>
-				<span>{{scoresQueried.data[0].teamName}}</span>
-			</h4>
+			<div class="col-md-pull-1">
+				<h4>
+					<span>Athletes:</span>
+					<span>{{scoresQueried.data[0].athlete1}}</span><span>, {{scoresQueried.data[0].athlete2}}</span><span ng-show="thirdAthlete">, {{scoresQueried.data[0].athlete3}}</span><span ng-show="fourthAthlete">, {{scoresQueried.data[0].athlete4}}</span>
+				</h4>
+				<h4>
+					<span>Team:</span>
+					<span>{{scoresQueried.data[0].teamName}}</span>
+				</h4>
+			</div>
 
 			<!-- score listings, athletes view -->
 			<div class="table-responsive col-md-10 col-md-offset-1" ng-show="listOrGraphScores === 'list'">
